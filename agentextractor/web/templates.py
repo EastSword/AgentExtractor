@@ -105,6 +105,119 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
 .stat { font-size: 12px; color: var(--text-muted); }
 .stat strong { color: var(--text-primary); font-weight: 600; }
 
+/* Icon System - SVG Icons using CSS */
+.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+.icon svg { width: 14px; height: 14px; }
+
+/* Icon: Search/Scan */
+.icon-search::before { content: ""; display: block; width: 12px; height: 12px; border: 2px solid currentColor; border-radius: 50%; position: relative; }
+.icon-search::after { content: ""; display: block; width: 5px; height: 2px; background: currentColor; position: absolute; bottom: -2px; right: -4px; transform: rotate(45deg); }
+
+/* Icon: Import/Package */
+.icon-import { position: relative; }
+.icon-import::before { content: ""; display: block; width: 12px; height: 10px; border: 2px solid currentColor; border-radius: 2px; }
+.icon-import::after { content: ""; display: block; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-bottom: 5px solid currentColor; position: absolute; top: -2px; left: 50%; transform: translateX(-50%); }
+
+/* Icon: Export/Download */
+.icon-export { position: relative; }
+.icon-export::before { content: ""; display: block; width: 12px; height: 10px; border: 2px solid currentColor; border-radius: 2px; }
+.icon-export::after { content: ""; display: block; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 5px solid currentColor; position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%); }
+
+/* Icon: Success/Check */
+.icon-check { position: relative; }
+.icon-check::before { content: ""; display: block; width: 10px; height: 6px; border-left: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); margin-top: 2px; }
+
+/* Icon: Error/Failed */
+.icon-error { position: relative; }
+.icon-error::before { content: ""; display: block; width: 10px; height: 10px; border: 2px solid currentColor; border-radius: 50%; }
+.icon-error::after { content: ""; display: block; width: 2px; height: 8px; background: currentColor; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+/* Icon: Warning */
+.icon-warning { position: relative; }
+.icon-warning::before { content: ""; display: block; width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-bottom: 12px solid currentColor; }
+.icon-warning::after { content: ""; display: block; width: 2px; height: 3px; background: currentColor; position: absolute; top: 2px; left: 50%; transform: translateX(-50%); }
+
+/* Icon: List/Document */
+.icon-list { position: relative; }
+.icon-list::before { content: ""; display: block; width: 10px; height: 10px; border: 2px solid currentColor; border-radius: 2px; }
+.icon-list::after { content: ""; display: block; width: 4px; height: 2px; background: currentColor; position: absolute; top: 4px; left: 3px; box-shadow: 0 4px 0 currentColor; }
+
+/* Icon: Skill/Target */
+.icon-skill { position: relative; }
+.icon-skill::before { content: ""; display: block; width: 12px; height: 12px; border: 2px solid currentColor; border-radius: 50%; }
+.icon-skill::after { content: ""; display: block; width: 4px; height: 4px; background: currentColor; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+/* Icon: Chat/Message */
+.icon-chat { position: relative; }
+.icon-chat::before { content: ""; display: block; width: 12px; height: 9px; border: 2px solid currentColor; border-radius: 2px 2px 2px 0; }
+.icon-chat::after { content: ""; display: block; width: 4px; height: 4px; border-left: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); position: absolute; bottom: -1px; left: 1px; }
+
+/* Icon: Robot/AI */
+.icon-robot { position: relative; }
+.icon-robot::before { content: ""; display: block; width: 12px; height: 10px; border: 2px solid currentColor; border-radius: 3px 3px 0 0; }
+.icon-robot::after { content: ""; display: block; width: 16px; height: 2px; border-top: 2px solid currentColor; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); border-radius: 2px; }
+
+/* Icon: Tool/MCP */
+.icon-tool { position: relative; }
+.icon-tool::before { content: ""; display: block; width: 10px; height: 10px; border: 2px solid currentColor; transform: rotate(45deg); }
+.icon-tool::after { content: ""; display: block; width: 4px; height: 2px; background: currentColor; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); }
+
+/* Icon: Workflow/Lightning */
+.icon-workflow { position: relative; }
+.icon-workflow::before { content: ""; display: block; width: 2px; height: 12px; background: currentColor; transform: skewX(-15deg); }
+.icon-workflow::after { content: ""; display: block; width: 8px; height: 2px; background: currentColor; position: absolute; top: 4px; left: -2px; transform: skewX(-15deg); }
+
+/* Icon: Star/Capability */
+.icon-star { position: relative; }
+.icon-star::before { content: ""; display: block; width: 12px; height: 12px; background: currentColor; clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+
+/* Icon: File */
+.icon-file { position: relative; }
+.icon-file::before { content: ""; display: block; width: 11px; height: 14px; border: 2px solid currentColor; border-radius: 2px; background: transparent; }
+.icon-file::after { content: ""; display: block; width: 5px; height: 5px; border-left: 2px solid currentColor; border-bottom: 2px solid currentColor; position: absolute; top: -1px; right: -1px; background: transparent; transform: rotate(-45deg); }
+
+/* Icon: Folder */
+.icon-folder { position: relative; }
+.icon-folder::before { content: ""; display: block; width: 14px; height: 10px; border: 2px solid currentColor; border-radius: 0 0 2px 2px; border-top: none; }
+.icon-folder::after { content: ""; display: block; width: 6px; height: 3px; border: 2px solid currentColor; border-radius: 2px 2px 0 0; border-bottom: none; position: absolute; top: 0; left: 0; }
+
+/* Icon: Refresh */
+.icon-refresh { position: relative; }
+.icon-refresh::before { content: ""; display: block; width: 10px; height: 10px; border: 2px solid currentColor; border-radius: 50%; border-right-color: transparent; }
+.icon-refresh::after { content: ""; display: block; width: 0; height: 0; border-top: 3px solid transparent; border-bottom: 3px solid transparent; border-left: 5px solid currentColor; position: absolute; top: 1px; right: 1px; transform: rotate(90deg); }
+
+/* Icon: User/Identity */
+.icon-user { position: relative; }
+.icon-user::before { content: ""; display: block; width: 8px; height: 8px; border: 2px solid currentColor; border-radius: 50%; }
+.icon-user::after { content: ""; display: block; width: 12px; height: 6px; border: 2px solid currentColor; border-radius: 0 0 6px 6px; border-top: none; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); }
+
+/* Icon: Execute/Rocket */
+.icon-rocket { position: relative; }
+.icon-rocket::before { content: ""; display: block; width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 12px solid currentColor; }
+.icon-rocket::after { content: ""; display: block; width: 4px; height: 4px; background: currentColor; position: absolute; top: 3px; left: 50%; transform: translateX(-50%); border-radius: 50%; }
+
+/* Icon: Copy */
+.icon-copy { position: relative; }
+.icon-copy::before { content: ""; display: block; width: 10px; height: 10px; border: 2px solid currentColor; border-radius: 2px; }
+.icon-copy::after { content: ""; display: block; width: 6px; height: 6px; border: 2px solid currentColor; border-radius: 2px; position: absolute; top: -2px; right: -2px; background: var(--bg-secondary); }
+
+/* Icon Button Style */
+.icon-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px; }
+
+/* Colored icons */
+.icon-success { color: var(--success); }
+.icon-error { color: var(--danger); }
+.icon-warning { color: var(--warning); }
+.icon-info { color: var(--accent); }
+
 /* Section */
 .section { margin-bottom: 24px; }
 .section-title { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
@@ -435,7 +548,7 @@ function renderProfile(p) {
         </div>
         
         <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
-            <button class="btn btn-primary" onclick="showAgentInquiryInScan()" style="padding:8px 16px;font-size:12px">🤖 Agent自描述询问</button>
+            <button class="btn btn-primary" onclick="showAgentInquiryInScan()" style="padding:8px 16px;font-size:12px"><span class="icon icon-robot"></span> Agent自描述询问</button>
         </div>
         
         <div id="scan-agent-inquiry-area" style="margin-top:16px;display:none">
@@ -448,16 +561,16 @@ function renderProfile(p) {
                     <option value="workflows">工作流</option>
                     <option value="context">上下文/记忆</option>
                 </select>
-                <button class="btn btn-ghost" onclick="generateScanAgentPrompt()" style="font-size:11px">📝 生成提示词</button>
+                <button class="btn btn-ghost" onclick="generateScanAgentPrompt()" style="font-size:11px"><span class="icon icon-file"></span> 生成提示词</button>
             </div>
             <div id="scan-prompt-area" style="margin-bottom:12px;display:none">
-                <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px">📋 提示词</label>
+                <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px"><span class="icon icon-list"></span> 提示词</label>
                 <textarea id="scan-agent-prompt" readonly style="width:100%;height:100px;padding:8px;border:1px solid var(--border);border-radius:var(--radius);font-size:11px;font-family:monospace;background:#fafbfc;resize:vertical"></textarea>
             </div>
             <div id="scan-response-area" style="display:none">
-                <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px">💬 Agent响应</label>
+                <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px"><span class="icon icon-chat"></span> Agent响应</label>
                 <textarea id="scan-agent-response" placeholder="粘贴Agent响应..." style="width:100%;height:120px;padding:8px;border:1px solid var(--border);border-radius:var(--radius);font-size:11px;font-family:monospace;resize:vertical"></textarea>
-                <button class="btn btn-success" onclick="parseScanAgentResponse()" style="margin-top:8px;padding:8px 16px;font-size:12px">🔄 解析并更新画像</button>
+                <button class="btn btn-success" onclick="parseScanAgentResponse()" style="margin-top:8px;padding:8px 16px;font-size:12px"><span class="icon icon-refresh"></span> 解析并更新画像</button>
             </div>
             <div id="scan-fusion-result" style="margin-top:12px"></div>
         </div>
@@ -513,13 +626,13 @@ async function parseScanAgentResponse() {
         const data = await resp.json();
         
         if (data.error) {
-            resultArea.innerHTML = '<div style="padding:12px;background:#fef2f2;border-radius:var(--radius);color:var(--danger)">❌ ' + data.error + '</div>';
+            resultArea.innerHTML = '<div style="padding:12px;background:#fef2f2;border-radius:var(--radius);color:var(--danger)"><span class="icon icon-error icon-error"></span> ' + data.error + '</div>';
             return;
         }
         
         const fusion = data.fusion_result || {};
         let html = '<div style="padding:12px;background:var(--success-light);border-radius:var(--radius)">';
-        html += '<div style="font-size:12px;font-weight:600;margin-bottom:8px">✅ 融合结果</div>';
+        html += '<div style="font-size:12px;font-weight:600;margin-bottom:8px"><span class="icon icon-check icon-success"></span> 融合结果</div>';
         
         if (fusion.identity || fusion.verified_identity) {
             const id = fusion.verified_identity || fusion.identity;
@@ -541,7 +654,7 @@ async function parseScanAgentResponse() {
         
     } catch (e) {
         console.error(e);
-        resultArea.innerHTML = '<div style="padding:12px;background:#fef2f2;border-radius:var(--radius);color:var(--danger)">❌ 解析失败</div>';
+        resultArea.innerHTML = '<div style="padding:12px;background:#fef2f2;border-radius:var(--radius);color:var(--danger)"><span class="icon icon-error icon-error"></span> 解析失败</div>';
     }
 }
 
@@ -760,7 +873,7 @@ async function doExport() {
     
     let msg = '✓ 已导出 ' + (data.size_bytes/1024).toFixed(1) + 'KB';
     if (data.bundle) {
-        msg += '\n📦 压缩包: ' + data.bundle;
+        msg += '\n<span class="icon icon-import"></span> 压缩包: ' + data.bundle;
     }
     document.getElementById('export-msg').textContent = msg;
     document.getElementById('export-msg').style.whiteSpace = 'pre-wrap';
@@ -858,7 +971,7 @@ function showImport() {
     const area = document.getElementById('import-area');
     area.innerHTML = `
         <div style="padding:20px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px">
-            <h3 style="margin-bottom:16px">📥 导入 Agent 资源</h3>
+            <h3 style="margin-bottom:16px"><span class="icon icon-import"></span> 导入 Agent 资源</h3>
             
             <div style="margin-bottom:16px">
                 <div style="display:flex;gap:8px;align-items:flex-end">
@@ -866,7 +979,7 @@ function showImport() {
                         <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:4px">1. 选择导出的 .agentpkg.json 文件</label>
                         <input type="text" id="import-json-path" placeholder="点击右侧浏览选择文件" style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px">
                     </div>
-                    <button class="btn btn-primary" onclick="browseImportJson()">📂 浏览</button>
+                    <button class="btn btn-primary" onclick="browseImportJson()"><span class="icon icon-folder"></span> 浏览</button>
                 </div>
             </div>
             
@@ -953,13 +1066,13 @@ async function loadImportPackage() {
         });
         const data = await resp.json();
         if (data.error) {
-            infoArea.innerHTML = '<div style="padding:16px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius);font-size:13px;color:var(--danger)">❌ 加载失败: ' + data.error + '</div>';
+            infoArea.innerHTML = '<div style="padding:16px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius);font-size:13px;color:var(--danger)"><span class="icon icon-error icon-error"></span> 加载失败: ' + data.error + '</div>';
             return;
         }
         packageInfo = data.package_info;
         renderPackageInfo(data);
     } catch (e) {
-        infoArea.innerHTML = '<div style="padding:16px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius);font-size:13px;color:var(--danger)">❌ 加载异常: ' + e.message + '</div>';
+        infoArea.innerHTML = '<div style="padding:16px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius);font-size:13px;color:var(--danger)"><span class="icon icon-error icon-error"></span> 加载异常: ' + e.message + '</div>';
     }
 }
 
@@ -988,20 +1101,20 @@ function renderPackageInfo(data) {
     if (totalFiles > 0) {
         detailHtml = `
             <div style="margin-top:16px;padding:12px;background:var(--bg-tertiary);border-radius:var(--radius)">
-                <h4 style="font-size:13px;margin-bottom:10px">🎯 能力维度分析</h4>
+                <h4 style="font-size:13px;margin-bottom:10px"><span class="icon icon-skill"></span> 能力维度分析</h4>
                 <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">
-                    <span style="padding:6px 12px;background:#28a745;color:white;border-radius:20px;font-size:12px">🎯 技能: ${summary.skills || 0}</span>
-                    <span style="padding:6px 12px;background:#0366d6;color:white;border-radius:20px;font-size:12px">🔧 MCP: ${summary.mcp_configs || 0}</span>
-                    <span style="padding:6px 12px;background:#9333ea;color:white;border-radius:20px;font-size:12px">⚡ 工作流: ${summary.workflows || 0}</span>
+                    <span style="padding:6px 12px;background:#28a745;color:white;border-radius:20px;font-size:12px"><span class="icon icon-skill"></span> 技能: ${summary.skills || 0}</span>
+                    <span style="padding:6px 12px;background:#0366d6;color:white;border-radius:20px;font-size:12px"><span class="icon icon-tool"></span> MCP: ${summary.mcp_configs || 0}</span>
+                    <span style="padding:6px 12px;background:#9333ea;color:white;border-radius:20px;font-size:12px"><span class="icon icon-workflow"></span> 工作流: ${summary.workflows || 0}</span>
                     <span style="padding:6px 12px;background:#ec4899;color:white;border-radius:20px;font-size:12px">🧠 记忆: ${summary.memory || 0}</span>
-                    <span style="padding:6px 12px;background:#f97316;color:white;border-radius:20px;font-size:12px">👤 身份: ${summary.identity || 0}</span>
+                    <span style="padding:6px 12px;background:#f97316;color:white;border-radius:20px;font-size:12px"><span class="icon icon-user"></span> 身份: ${summary.identity || 0}</span>
                 </div>
         `;
 
         if (analysis.skills_detail && analysis.skills_detail.length > 0) {
             detailHtml += `
                 <div style="margin-bottom:10px">
-                    <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">🎯 技能 (${analysis.skills_detail.length})</div>
+                    <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px"><span class="icon icon-skill"></span> 技能 (${analysis.skills_detail.length})</div>
                     <div style="max-height:80px;overflow-y:auto">
             `;
             analysis.skills_detail.forEach(item => {
@@ -1013,7 +1126,7 @@ function renderPackageInfo(data) {
         if (analysis.mcp_configs_detail && analysis.mcp_configs_detail.length > 0) {
             detailHtml += `
                 <div style="margin-bottom:10px">
-                    <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">🔧 MCP (${analysis.mcp_configs_detail.length})</div>
+                    <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px"><span class="icon icon-tool"></span> MCP (${analysis.mcp_configs_detail.length})</div>
                     <div style="max-height:80px;overflow-y:auto">
             `;
             analysis.mcp_configs_detail.forEach(item => {
@@ -1037,7 +1150,7 @@ function renderPackageInfo(data) {
         </div>
         
         <div style="margin-bottom:16px;padding:16px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius)">
-            <h4 style="font-size:13px;margin-bottom:12px">🤖 Agent 自描述询问</h4>
+            <h4 style="font-size:13px;margin-bottom:12px"><span class="icon icon-robot"></span> Agent 自描述询问</h4>
             <p style="font-size:11px;color:var(--text-muted);margin-bottom:12px">
                 生成一个提示词，让Agent描述自己的能力，然后将响应粘贴到下方，系统会自动融合到分析结果中。
             </p>
@@ -1049,25 +1162,25 @@ function renderPackageInfo(data) {
                     <option value="workflows">工作流</option>
                     <option value="context">上下文/记忆</option>
                 </select>
-                <button class="btn btn-primary" onclick="generateAgentInquiryPrompt()" style="padding:8px 16px">📝 生成提示词</button>
+                <button class="btn btn-primary" onclick="generateAgentInquiryPrompt()" style="padding:8px 16px"><span class="icon icon-file"></span> 生成提示词</button>
             </div>
             <div id="agent-prompt-area" style="margin-bottom:12px;display:none">
-                <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px">📋 提示词（复制给Agent）</label>
+                <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px"><span class="icon icon-list"></span> 提示词（复制给Agent）</label>
                 <textarea id="agent-prompt" readonly style="width:100%;height:120px;padding:10px;border:1px solid var(--border);border-radius:var(--radius);font-size:11px;font-family:monospace;background:#fafbfc;resize:vertical"></textarea>
-                <button class="btn btn-ghost" onclick="copyPrompt()" style="margin-top:6px;font-size:11px">📋 复制提示词</button>
+                <button class="btn btn-ghost" onclick="copyPrompt()" style="margin-top:6px;font-size:11px"><span class="icon icon-list"></span> 复制提示词</button>
             </div>
             <div id="agent-response-area" style="margin-bottom:12px;display:none">
-                <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px">💬 Agent响应（粘贴Agent的回复）</label>
+                <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px"><span class="icon icon-chat"></span> Agent响应（粘贴Agent的回复）</label>
                 <textarea id="agent-response" placeholder="将Agent的回复粘贴到此处..." style="width:100%;height:150px;padding:10px;border:1px solid var(--border);border-radius:var(--radius);font-size:11px;font-family:monospace;background:white;resize:vertical"></textarea>
             </div>
             <div id="parse-response-btn-area" style="display:none;text-align:center">
-                <button class="btn btn-success" onclick="parseAgentResponse()" style="padding:10px 24px;font-size:13px">🔄 解析并融合</button>
+                <button class="btn btn-success" onclick="parseAgentResponse()" style="padding:10px 24px;font-size:13px"><span class="icon icon-refresh"></span> 解析并融合</button>
             </div>
             <div id="fusion-result-area" style="margin-top:12px;display:none"></div>
         </div>
         
         <div style="text-align:center;margin-bottom:8px">
-            <button class="btn btn-success" onclick="createImportPlan()" style="padding:10px 24px;font-size:14px">🚀 生成导入计划</button>
+            <button class="btn btn-success" onclick="createImportPlan()" style="padding:10px 24px;font-size:14px"><span class="icon icon-rocket icon-success"></span> 生成导入计划</button>
         </div>
     `;
 }
@@ -1161,7 +1274,7 @@ async function parseAgentResponse() {
         const data = await resp.json();
         
         if (data.error) {
-            fusionArea.innerHTML = '<div style="padding:12px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius);color:var(--danger)">❌ 解析失败: ' + data.error + '</div>';
+            fusionArea.innerHTML = '<div style="padding:12px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius);color:var(--danger)"><span class="icon icon-error icon-error"></span> 解析失败: ' + data.error + '</div>';
             return;
         }
         
@@ -1169,13 +1282,13 @@ async function parseAgentResponse() {
         const fusion = data.fusion_result || {};
         
         let resultHtml = '<div style="padding:12px;background:var(--success-light);border:1px solid #28a745;border-radius:var(--radius)">';
-        resultHtml += '<h4 style="font-size:13px;margin-bottom:8px;color:#28a745">✅ 解析结果</h4>';
+        resultHtml += '<h4 style="font-size:13px;margin-bottom:8px;color:#28a745"><span class="icon icon-check icon-success"></span> 解析结果</h4>';
         
         // Identity
         const identity = parsed.identity || fusion.verified_identity || fusion.identity || {};
         if (identity.name || identity.role) {
             resultHtml += '<div style="margin-bottom:10px;padding:8px;background:white;border-radius:6px">';
-            resultHtml += '<div style="font-weight:600;margin-bottom:4px">👤 身份: ' + (identity.name || '未命名') + '</div>';
+            resultHtml += '<div style="font-weight:600;margin-bottom:4px"><span class="icon icon-user"></span> 身份: ' + (identity.name || '未命名') + '</div>';
             if (identity.role) {
                 resultHtml += '<div style="font-size:11px;color:var(--text-muted)">' + identity.role + '</div>';
             }
@@ -1189,7 +1302,7 @@ async function parseAgentResponse() {
         const skills = parsed.skills || fusion.verified_skills || fusion.skills || [];
         if (skills.length > 0) {
             resultHtml += '<div style="margin-bottom:10px">';
-            resultHtml += '<div style="font-weight:600;margin-bottom:6px">🎯 技能 (' + skills.length + ')</div>';
+            resultHtml += '<div style="font-weight:600;margin-bottom:6px"><span class="icon icon-skill"></span> 技能 (' + skills.length + ')</div>';
             resultHtml += '<div style="max-height:150px;overflow-y:auto">';
             skills.forEach(skill => {
                 const skillName = skill.name || '未命名';
@@ -1203,7 +1316,7 @@ async function parseAgentResponse() {
         const workflows = parsed.workflows || fusion.verified_workflows || fusion.workflows || [];
         if (workflows.length > 0) {
             resultHtml += '<div style="margin-bottom:10px">';
-            resultHtml += '<div style="font-weight:600;margin-bottom:6px">⚡ 工作流 (' + workflows.length + ')</div>';
+            resultHtml += '<div style="font-weight:600;margin-bottom:6px"><span class="icon icon-workflow"></span> 工作流 (' + workflows.length + ')</div>';
             workflows.forEach(wf => {
                 const steps = wf.steps ? wf.steps.slice(0, 4).join(' → ') : '';
                 resultHtml += '<div style="font-size:11px;padding:4px 6px;background:white;border-radius:4px;margin-bottom:3px">' + (wf.name || '未命名') + (steps ? ': ' + steps : '') + '</div>';
@@ -1215,9 +1328,9 @@ async function parseAgentResponse() {
         const mcps = parsed.mcp_configs || [];
         if (mcps.length > 0) {
             resultHtml += '<div style="margin-bottom:10px">';
-            resultHtml += '<div style="font-weight:600;margin-bottom:6px">🔧 MCP配置 (' + mcps.length + ')</div>';
+            resultHtml += '<div style="font-weight:600;margin-bottom:6px"><span class="icon icon-tool"></span> MCP配置 (' + mcps.length + ')</div>';
             mcps.forEach(mcp => {
-                resultHtml += '<div style="font-size:11px;padding:4px 6px;background:white;border-radius:4px;margin-bottom:3px">' + mcp.name + ' ' + (mcp.enabled ? '✅' : '❌') + '</div>';
+                resultHtml += '<div style="font-size:11px;padding:4px 6px;background:white;border-radius:4px;margin-bottom:3px">' + mcp.name + ' ' + (mcp.enabled ? '<span class="icon icon-check icon-success"></span>' : '<span class="icon icon-error icon-error"></span>') + '</div>';
             });
             resultHtml += '</div>';
         }
@@ -1226,7 +1339,7 @@ async function parseAgentResponse() {
         const capabilities = parsed.capabilities || fusion.capabilities || [];
         if (capabilities.length > 0) {
             resultHtml += '<div style="margin-bottom:10px">';
-            resultHtml += '<div style="font-weight:600;margin-bottom:6px">✨ 核心能力</div>';
+            resultHtml += '<div style="font-weight:600;margin-bottom:6px"><span class="icon icon-star"></span> 核心能力</div>';
             resultHtml += '<div style="font-size:11px;color:var(--text-muted)">' + capabilities.slice(0, 5).join('、') + (capabilities.length > 5 ? '...' : '') + '</div>';
             resultHtml += '</div>';
         }
@@ -1240,7 +1353,7 @@ async function parseAgentResponse() {
         
     } catch (e) {
         console.error(e);
-        fusionArea.innerHTML = '<div style="padding:12px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius);color:var(--danger)">❌ 解析失败: ' + e.message + '</div>';
+        fusionArea.innerHTML = '<div style="padding:12px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius);color:var(--danger)"><span class="icon icon-error icon-error"></span> 解析失败: ' + e.message + '</div>';
     }
 }
 
@@ -1281,7 +1394,7 @@ async function createImportPlan() {
         });
         const data = await resp.json();
         if (data.error) {
-            area.innerHTML = '<div style="padding:24px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius);font-size:14px;text-align:center;color:var(--danger)">❌ 生成失败: ' + data.error + '</div>';
+            area.innerHTML = '<div style="padding:24px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius);font-size:14px;text-align:center;color:var(--danger)"><span class="icon icon-error icon-error"></span> 生成失败: ' + data.error + '</div>';
             btn.disabled = false;
             btn.textContent = originalText;
             return;
@@ -1293,7 +1406,7 @@ async function createImportPlan() {
         btn.textContent = originalText;
         window.scrollTo({ top: area.offsetTop - 100, behavior: 'smooth' });
     } catch (e) {
-        area.innerHTML = '<div style="padding:24px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius);font-size:14px;text-align:center;color:var(--danger)">❌ 生成异常: ' + e.message + '</div>';
+        area.innerHTML = '<div style="padding:24px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius);font-size:14px;text-align:center;color:var(--danger)"><span class="icon icon-error icon-error"></span> 生成异常: ' + e.message + '</div>';
         btn.disabled = false;
         btn.textContent = originalText;
     }
@@ -1304,7 +1417,7 @@ function renderImportPlan(plan) {
     let html = `
         <div style="padding:20px;background:var(--bg-tertiary);border:1px solid var(--border);border-radius:var(--radius);margin-top:16px">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-                <h3 style="margin:0">📋 导入计划</h3>
+                <h3 style="margin:0"><span class="icon icon-list"></span> 导入计划</h3>
                 <span style="padding:4px 12px;background:var(--accent-light);color:var(--accent);border-radius:16px;font-size:12px">${plan.operations.length} 个文件</span>
             </div>
             <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">
@@ -1316,7 +1429,7 @@ function renderImportPlan(plan) {
     if (plan.skipped_duplicates && plan.skipped_duplicates.length > 0) {
         html += `
             <div style="margin-bottom:16px;padding:12px;background:#fff3cd;border:1px solid #ffeeba;border-radius:8px">
-                <div style="font-size:12px;font-weight:600;margin-bottom:4px">⚠️ 已跳过重复文件 (${plan.skipped_duplicates.length})</div>
+                <div style="font-size:12px;font-weight:600;margin-bottom:4px"><span class="icon icon-warning icon-warning"></span> 已跳过重复文件 (${plan.skipped_duplicates.length})</div>
                 <div style="font-size:11px;color:var(--text-muted)">
         `;
         plan.skipped_duplicates.slice(0, 5).forEach(d => {
@@ -1342,7 +1455,7 @@ function renderImportPlan(plan) {
                 <span style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;background:var(--bg-tertiary);border-radius:50%;font-size:11px;color:var(--text-muted)">${index + 1}</span>
                 <span style="flex:1;font-size:13px">${op.source.split('/').pop()}</span>
                 <span style="font-size:11px;padding:2px 8px;background:var(--bg-tertiary);border-radius:8px">${getCategoryDisplay(op.category)}</span>
-                <span style="font-size:11px;font-weight:600">${op.type === 'conflict' ? '⚔️ 冲突' : '✅ 复制'}</span>
+                <span style="font-size:11px;font-weight:600">${op.type === 'conflict' ? '<span class="icon icon-warning icon-warning"></span> 冲突' : '<span class="icon icon-check icon-success"></span> 复制'}</span>
                 ${isConflict ? `
                     <select id="decide-${index}" onchange="setImportDecision('${op.source}', this.value)" style="padding:4px 8px;font-size:11px;border:1px solid var(--border);border-radius:4px">
                         <option value="skip">跳过</option>
@@ -1359,8 +1472,8 @@ function renderImportPlan(plan) {
                 </div>
             </div>
             <div style="display:flex;gap:12px;justify-content:center">
-                <button class="btn btn-success" onclick="executeImport()" style="padding:10px 32px;font-size:14px">✅ 执行导入</button>
-                <button class="btn btn-ghost" onclick="showImport()">🔄 重置</button>
+                <button class="btn btn-success" onclick="executeImport()" style="padding:10px 32px;font-size:14px"><span class="icon icon-check icon-success"></span> 执行导入</button>
+                <button class="btn btn-ghost" onclick="showImport()"><span class="icon icon-refresh"></span> 重置</button>
             </div>
         </div>
     `;
@@ -1391,7 +1504,7 @@ async function executeImport() {
         });
         const data = await resp.json();
         if (data.error) {
-            area.innerHTML = '<div style="padding:24px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius);font-size:14px;text-align:center;color:var(--danger)">❌ 导入失败: ' + data.error + '</div>';
+            area.innerHTML = '<div style="padding:24px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius);font-size:14px;text-align:center;color:var(--danger)"><span class="icon icon-error icon-error"></span> 导入失败: ' + data.error + '</div>';
             btn.disabled = false;
             btn.textContent = originalText;
             return;
@@ -1402,7 +1515,7 @@ async function executeImport() {
         btn.textContent = originalText;
         window.scrollTo({ top: area.offsetTop - 100, behavior: 'smooth' });
     } catch (e) {
-        area.innerHTML = '<div style="padding:24px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius);font-size:14px;text-align:center;color:var(--danger)">❌ 导入异常: ' + e.message + '</div>';
+        area.innerHTML = '<div style="padding:24px;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius);font-size:14px;text-align:center;color:var(--danger)"><span class="icon icon-error icon-error"></span> 导入异常: ' + e.message + '</div>';
         btn.disabled = false;
         btn.textContent = originalText;
     }
@@ -1418,7 +1531,7 @@ function renderImportResult(result) {
 
         statsHtml = `
             <div style="margin-bottom:20px;padding:16px;background:var(--bg-tertiary);border-radius:var(--radius)">
-                <h4 style="font-size:14px;margin-bottom:12px">📊 导入统计</h4>
+                <h4 style="font-size:14px;margin-bottom:12px"><span class="icon icon-list"></span> 导入统计</h4>
                 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;font-size:12px">
                     <div style="text-align:center;padding:16px;background:var(--bg-secondary);border-radius:8px">
                         <div style="font-size:28px;font-weight:bold;color:#28a745">${stats.total_imported || 0}</div>
@@ -1436,14 +1549,14 @@ function renderImportResult(result) {
             </div>
 
             <div style="margin-bottom:20px;padding:16px;background:var(--bg-tertiary);border-radius:var(--radius)">
-                <h4 style="font-size:14px;margin-bottom:12px">🎯 能力维度</h4>
+                <h4 style="font-size:14px;margin-bottom:12px"><span class="icon icon-skill"></span> 能力维度</h4>
                 <div style="font-size:12px">
                     <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px">
-                        ${capSummary.capabilities_by_type?.skills ? `<span style="padding:6px 14px;background:#28a745;color:white;border-radius:20px">🎯 技能: ${capSummary.capabilities_by_type.skills}</span>` : ''}
-                        ${capSummary.capabilities_by_type?.mcp_configs ? `<span style="padding:6px 14px;background:#0366d6;color:white;border-radius:20px">🔧 MCP: ${capSummary.capabilities_by_type.mcp_configs}</span>` : ''}
-                        ${capSummary.capabilities_by_type?.workflows ? `<span style="padding:6px 14px;background:#9333ea;color:white;border-radius:20px">⚡ 工作流: ${capSummary.capabilities_by_type.workflows}</span>` : ''}
+                        ${capSummary.capabilities_by_type?.skills ? `<span style="padding:6px 14px;background:#28a745;color:white;border-radius:20px"><span class="icon icon-skill"></span> 技能: ${capSummary.capabilities_by_type.skills}</span>` : ''}
+                        ${capSummary.capabilities_by_type?.mcp_configs ? `<span style="padding:6px 14px;background:#0366d6;color:white;border-radius:20px"><span class="icon icon-tool"></span> MCP: ${capSummary.capabilities_by_type.mcp_configs}</span>` : ''}
+                        ${capSummary.capabilities_by_type?.workflows ? `<span style="padding:6px 14px;background:#9333ea;color:white;border-radius:20px"><span class="icon icon-workflow"></span> 工作流: ${capSummary.capabilities_by_type.workflows}</span>` : ''}
                         ${capSummary.capabilities_by_type?.memory_entries ? `<span style="padding:6px 14px;background:#ec4899;color:white;border-radius:20px">🧠 记忆: ${capSummary.capabilities_by_type.memory_entries}</span>` : ''}
-                        ${capSummary.capabilities_by_type?.identity_files ? `<span style="padding:6px 14px;background:#f97316;color:white;border-radius:20px">👤 身份: ${capSummary.capabilities_by_type.identity_files}</span>` : ''}
+                        ${capSummary.capabilities_by_type?.identity_files ? `<span style="padding:6px 14px;background:#f97316;color:white;border-radius:20px"><span class="icon icon-user"></span> 身份: ${capSummary.capabilities_by_type.identity_files}</span>` : ''}
                     </div>
                 </div>
             </div>
@@ -1452,7 +1565,7 @@ function renderImportResult(result) {
         if (capSummary.skills && capSummary.skills.length > 0) {
             statsHtml += `
                 <div style="margin-bottom:20px">
-                    <h4 style="font-size:13px;margin-bottom:8px">🎯 技能 (${capSummary.skills.length})</h4>
+                    <h4 style="font-size:13px;margin-bottom:8px"><span class="icon icon-skill"></span> 技能 (${capSummary.skills.length})</h4>
                     <div style="max-height:150px;overflow-y:auto;border:1px solid var(--border);border-radius:8px;padding:8px;background:white">
             `;
             capSummary.skills.forEach(skill => {
@@ -1464,7 +1577,7 @@ function renderImportResult(result) {
         if (capSummary.mcp_configs && capSummary.mcp_configs.length > 0) {
             statsHtml += `
                 <div style="margin-bottom:20px">
-                    <h4 style="font-size:13px;margin-bottom:8px">🔧 MCP (${capSummary.mcp_configs.length})</h4>
+                    <h4 style="font-size:13px;margin-bottom:8px"><span class="icon icon-tool"></span> MCP (${capSummary.mcp_configs.length})</h4>
                     <div style="max-height:150px;overflow-y:auto;border:1px solid var(--border);border-radius:8px;padding:8px;background:white">
             `;
             capSummary.mcp_configs.forEach(mcp => {
@@ -1476,7 +1589,7 @@ function renderImportResult(result) {
         if (stats.folders_created && stats.folders_created.length > 0) {
             statsHtml += `
                 <div style="margin-bottom:20px">
-                    <h4 style="font-size:13px;margin-bottom:8px">📁 创建的目录</h4>
+                    <h4 style="font-size:13px;margin-bottom:8px"><span class="icon icon-folder"></span> 创建的目录</h4>
                     <div style="font-size:11px;color:var(--text-muted)">
             `;
             stats.folders_created.forEach(folder => {
@@ -1496,7 +1609,7 @@ function renderImportResult(result) {
     let html = `
         <div style="padding:20px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);margin-top:16px">
             <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-                <div style="font-size:48px">${result.success ? '✅' : '❌'}</div>
+                <div style="font-size:48px">${result.success ? '<span class="icon icon-check icon-success"></span>' : '<span class="icon icon-error icon-error"></span>'}</div>
                 <div>
                     <h3 style="margin:0;margin-bottom:4px">${result.success ? '导入成功' : '导入失败'}</h3>
                     <p style="font-size:13px;color:var(--text-muted);margin:0">${result.message}</p>
@@ -1508,7 +1621,7 @@ function renderImportResult(result) {
     if (result.imported_files.length > 0) {
         html += `
             <div style="margin-bottom:16px">
-                <h4 style="font-size:13px;margin-bottom:8px">📄 已导入文件 (${result.imported_files.length})</h4>
+                <h4 style="font-size:13px;margin-bottom:8px"><span class="icon icon-file"></span> 已导入文件 (${result.imported_files.length})</h4>
                 <div style="max-height:200px;overflow-y:auto;border:1px solid var(--border);border-radius:8px;padding:8px;background:white">
         `;
         result.imported_files.forEach(f => {
@@ -1531,7 +1644,7 @@ function renderImportResult(result) {
 
     html += `
             <div style="margin-top:16px;text-align:center">
-                <button class="btn btn-primary" onclick="showImport()">📥 继续导入</button>
+                <button class="btn btn-primary" onclick="showImport()"><span class="icon icon-import"></span> 继续导入</button>
             </div>
         </div>
     `;
