@@ -1,0 +1,211 @@
+platform: cursor
+
+rules:
+  # Core Configuration Files
+  - id: cursor_rules_file
+    pattern: ".cursorrules"
+    category: steering
+    confidence: 0.95
+    content_validators: ["contains_instructions"]
+    description: "Cursor global rules file"
+
+  - id: cursor_dir
+    pattern: ".cursor"
+    category: identity
+    confidence: 0.95
+    description: "Cursor configuration directory"
+
+  # Rules Directory
+  - id: cursor_rules_dir_md
+    pattern: ".cursor/rules/**/*.md"
+    category: steering
+    confidence: 0.95
+    description: "Cursor rules directory (Markdown)"
+
+  - id: cursor_rules_dir_mdc
+    pattern: ".cursor/rules/**/*.mdc"
+    category: steering
+    confidence: 0.95
+    description: "Cursor rules directory (MDC with frontmatter)"
+
+  - id: cursor_rules_subdir
+    pattern: ".cursor/rules/**"
+    category: steering
+    confidence: 0.85
+    description: "Cursor rules directory structure"
+
+  # Skills Directory
+  - id: cursor_skills_md
+    pattern: ".cursor/skills/**/*.md"
+    category: skill
+    confidence: 0.9
+    description: "Cursor skill definitions"
+
+  - id: cursor_skills_dir
+    pattern: ".cursor/skills/**"
+    category: skill
+    confidence: 0.8
+    description: "Cursor skills directory"
+
+  # Agents/Subagents Directory
+  - id: cursor_agents_md
+    pattern: ".cursor/agents/**/*.md"
+    category: identity
+    confidence: 0.9
+    description: "Cursor agent/subagent definitions"
+
+  - id: cursor_agents_dir
+    pattern: ".cursor/agents/**"
+    category: identity
+    confidence: 0.8
+    description: "Cursor agents directory"
+
+  # MCP Configuration
+  - id: cursor_mcp_json
+    pattern: ".cursor/mcp.json"
+    category: mcp_config
+    confidence: 0.95
+    content_validators: ["has_mcp_config"]
+    description: "Cursor MCP configuration"
+
+  - id: cursor_mcp_dir
+    pattern: ".cursor/mcp/**/*"
+    category: mcp_config
+    confidence: 0.85
+    description: "Cursor MCP configuration directory"
+
+  # Settings and Configuration
+  - id: cursor_settings_json
+    pattern: ".cursor/settings.json"
+    category: steering
+    confidence: 0.9
+    description: "Cursor settings file"
+
+  - id: cursor_settings_local
+    pattern: ".cursor/settings.local.json"
+    category: steering
+    confidence: 0.85
+    description: "Cursor local settings file"
+
+  # Commands Directory
+  - id: cursor_commands_md
+    pattern: ".cursor/commands/**/*.md"
+    category: workflow
+    confidence: 0.85
+    description: "Cursor custom commands"
+
+  - id: cursor_commands_dir
+    pattern: ".cursor/commands/**"
+    category: workflow
+    confidence: 0.75
+    description: "Cursor commands directory"
+
+  # Prompts and Templates
+  - id: cursor_prompts_md
+    pattern: ".cursor/prompts/**/*.md"
+    category: prompt
+    confidence: 0.85
+    description: "Cursor prompt templates"
+
+  - id: cursor_prompts_dir
+    pattern: ".cursor/prompts/**"
+    category: prompt
+    confidence: 0.75
+    description: "Cursor prompts directory"
+
+  # Memory and Context
+  - id: cursor_memory_md
+    pattern: ".cursor/memory/**/*.md"
+    category: memory
+    confidence: 0.85
+    description: "Cursor memory files"
+
+  - id: cursor_memory_dir
+    pattern: ".cursor/memory/**"
+    category: memory
+    confidence: 0.75
+    description: "Cursor memory directory"
+
+  # Context Files
+  - id: cursor_context_md
+    pattern: ".cursor/context/**/*.md"
+    category: knowledge
+    confidence: 0.85
+    description: "Cursor context files"
+
+  - id: cursor_context_dir
+    pattern: ".cursor/context/**"
+    category: knowledge
+    confidence: 0.75
+    description: "Cursor context directory"
+
+  # Workflows and Automation
+  - id: cursor_workflows_yaml
+    pattern: ".cursor/workflows/**/*.yaml"
+    category: workflow
+    confidence: 0.85
+    description: "Cursor workflow definitions"
+
+  - id: cursor_workflows_yml
+    pattern: ".cursor/workflows/**/*.yml"
+    category: workflow
+    confidence: 0.85
+    description: "Cursor workflow definitions"
+
+  - id: cursor_workflows_json
+    pattern: ".cursor/workflows/**/*.json"
+    category: workflow
+    confidence: 0.85
+    description: "Cursor workflow definitions"
+
+  - id: cursor_workflows_dir
+    pattern: ".cursor/workflows/**"
+    category: workflow
+    confidence: 0.75
+    description: "Cursor workflows directory"
+
+  # Hooks and Scripts
+  - id: cursor_hooks_py
+    pattern: ".cursor/hooks/**/*.py"
+    category: hook
+    confidence: 0.85
+    description: "Cursor Python hook scripts"
+
+  - id: cursor_hooks_js
+    pattern: ".cursor/hooks/**/*.js"
+    category: hook
+    confidence: 0.85
+    description: "Cursor JavaScript hook scripts"
+
+  - id: cursor_hooks_dir
+    pattern: ".cursor/hooks/**"
+    category: hook
+    confidence: 0.75
+    description: "Cursor hooks directory"
+
+  # Knowledge and Documentation
+  - id: cursor_knowledge_md
+    pattern: ".cursor/knowledge/**/*.md"
+    category: knowledge
+    confidence: 0.85
+    description: "Cursor knowledge base"
+
+  - id: cursor_knowledge_dir
+    pattern: ".cursor/knowledge/**"
+    category: knowledge
+    confidence: 0.75
+    description: "Cursor knowledge directory"
+
+  - id: cursor_docs_md
+    pattern: ".cursor/docs/**/*.md"
+    category: knowledge
+    confidence: 0.8
+    description: "Cursor documentation files"
+
+  # AGENTS.md at root
+  - id: cursor_agents_root
+    pattern: "AGENTS.md"
+    category: identity
+    confidence: 0.85
+    content_validators: ["contains_instructions"]
+    description: "Agent specification file at root"

@@ -1,0 +1,303 @@
+platform: kiro
+
+rules:
+  # Core Configuration Directory
+  - id: kiro_dotdir
+    pattern: ".kiro"
+    category: identity
+    confidence: 0.95
+    description: "Kiro configuration directory"
+
+  # Steering Files
+  - id: kiro_steering_product
+    pattern: ".kiro/steering/product.md"
+    category: steering
+    confidence: 0.95
+    description: "Kiro product specification - project features and business logic"
+
+  - id: kiro_steering_structure
+    pattern: ".kiro/steering/structure.md"
+    category: steering
+    confidence: 0.95
+    description: "Kiro structure specification - how codebase is organized"
+
+  - id: kiro_steering_tech
+    pattern: ".kiro/steering/tech.md"
+    category: steering
+    confidence: 0.95
+    description: "Kiro tech specification - technology stack and conventions"
+
+  - id: kiro_steering_md
+    pattern: ".kiro/steering/**/*.md"
+    category: steering
+    confidence: 0.9
+    description: "Kiro steering files"
+
+  - id: kiro_steering_dir
+    pattern: ".kiro/steering/**"
+    category: steering
+    confidence: 0.85
+    description: "Kiro steering directory"
+
+  # Skills Directory
+  - id: kiro_skills_md
+    pattern: ".kiro/skills/**/SKILL.md"
+    category: skill
+    confidence: 0.95
+    description: "Kiro skill definitions (Agent Skills standard)"
+
+  - id: kiro_skills_dir
+    pattern: ".kiro/skills/**"
+    category: skill
+    confidence: 0.85
+    description: "Kiro skills directory"
+
+  # Specs Directory
+  - id: kiro_specs_requirements
+    pattern: ".kiro/specs/**/requirements.md"
+    category: workflow
+    confidence: 0.9
+    description: "Kiro requirements specification"
+
+  - id: kiro_specs_design
+    pattern: ".kiro/specs/**/design.md"
+    category: workflow
+    confidence: 0.9
+    description: "Kiro design specification"
+
+  - id: kiro_specs_tasks
+    pattern: ".kiro/specs/**/tasks.md"
+    category: workflow
+    confidence: 0.9
+    description: "Kiro task breakdown specification"
+
+  - id: kiro_specs_md
+    pattern: ".kiro/specs/**/*.md"
+    category: workflow
+    confidence: 0.85
+    description: "Kiro specification files"
+
+  - id: kiro_specs_dir
+    pattern: ".kiro/specs/**"
+    category: workflow
+    confidence: 0.8
+    description: "Kiro specs directory"
+
+  # Hooks Directory
+  - id: kiro_hooks_json
+    pattern: ".kiro/hooks/**/*.json"
+    category: hook
+    confidence: 0.95
+    content_validators: ["has_hook_structure"]
+    description: "Kiro automation hooks (JSON configuration)"
+
+  - id: kiro_hooks_py
+    pattern: ".kiro/hooks/**/*.py"
+    category: hook
+    confidence: 0.9
+    description: "Kiro Python hook scripts"
+
+  - id: kiro_hooks_js
+    pattern: ".kiro/hooks/**/*.js"
+    category: hook
+    confidence: 0.9
+    description: "Kiro JavaScript hook scripts"
+
+  - id: kiro_hooks_dir
+    pattern: ".kiro/hooks/**"
+    category: hook
+    confidence: 0.85
+    description: "Kiro hooks directory"
+
+  # MCP Configuration
+  - id: kiro_mcp_json
+    pattern: ".kiro/settings/mcp.json"
+    category: mcp_config
+    confidence: 0.95
+    content_validators: ["has_mcp_config"]
+    description: "Kiro MCP servers configuration"
+
+  - id: kiro_mcp_dir
+    pattern: ".kiro/mcp/**/*"
+    category: mcp_config
+    confidence: 0.85
+    description: "Kiro MCP configuration directory"
+
+  # Settings Directory
+  - id: kiro_settings_json
+    pattern: ".kiro/settings/settings.json"
+    category: steering
+    confidence: 0.9
+    description: "Kiro settings configuration"
+
+  - id: kiro_settings_dir
+    pattern: ".kiro/settings/**"
+    category: steering
+    confidence: 0.8
+    description: "Kiro settings directory"
+
+  # Powers Directory
+  - id: kiro_powers_installed
+    pattern: ".kiro/powers/installed.json"
+    category: dependency
+    confidence: 0.9
+    description: "Kiro installed powers list"
+
+  - id: kiro_powers_dir
+    pattern: ".kiro/powers/**"
+    category: dependency
+    confidence: 0.85
+    description: "Kiro powers directory"
+
+  # Extensions Directory
+  - id: kiro_extensions_json
+    pattern: ".kiro/extensions/extensions.json"
+    category: dependency
+    confidence: 0.9
+    description: "Kiro extensions list"
+
+  - id: kiro_extensions_dir
+    pattern: ".kiro/extensions/**"
+    category: dependency
+    confidence: 0.8
+    description: "Kiro extensions directory"
+
+  # Memory and Context
+  - id: kiro_memory_md
+    pattern: ".kiro/memory/**/*.md"
+    category: memory
+    confidence: 0.85
+    description: "Kiro memory files"
+
+  - id: kiro_memory_dir
+    pattern: ".kiro/memory/**"
+    category: memory
+    confidence: 0.75
+    description: "Kiro memory directory"
+
+  - id: kiro_context_md
+    pattern: ".kiro/context/**/*.md"
+    category: knowledge
+    confidence: 0.85
+    description: "Kiro context files"
+
+  - id: kiro_context_dir
+    pattern: ".kiro/context/**"
+    category: knowledge
+    confidence: 0.75
+    description: "Kiro context directory"
+
+  # Knowledge and Documentation
+  - id: kiro_knowledge_md
+    pattern: ".kiro/knowledge/**/*.md"
+    category: knowledge
+    confidence: 0.85
+    description: "Kiro knowledge base"
+
+  - id: kiro_knowledge_dir
+    pattern: ".kiro/knowledge/**"
+    category: knowledge
+    confidence: 0.75
+    description: "Kiro knowledge directory"
+
+  - id: kiro_docs_md
+    pattern: ".kiro/docs/**/*.md"
+    category: knowledge
+    confidence: 0.8
+    description: "Kiro documentation files"
+
+  # Prompts and Templates
+  - id: kiro_prompts_md
+    pattern: ".kiro/prompts/**/*.md"
+    category: prompt
+    confidence: 0.85
+    description: "Kiro prompt templates"
+
+  - id: kiro_prompts_dir
+    pattern: ".kiro/prompts/**"
+    category: prompt
+    confidence: 0.75
+    description: "Kiro prompts directory"
+
+  - id: kiro_templates_dir
+    pattern: ".kiro/templates/**/*"
+    category: template
+    confidence: 0.8
+    description: "Kiro template files"
+
+  # Workflows and Automation
+  - id: kiro_workflows_yaml
+    pattern: ".kiro/workflows/**/*.yaml"
+    category: workflow
+    confidence: 0.85
+    description: "Kiro workflow definitions"
+
+  - id: kiro_workflows_yml
+    pattern: ".kiro/workflows/**/*.yml"
+    category: workflow
+    confidence: 0.85
+    description: "Kiro workflow definitions"
+
+  - id: kiro_workflows_json
+    pattern: ".kiro/workflows/**/*.json"
+    category: workflow
+    confidence: 0.85
+    description: "Kiro workflow definitions"
+
+  - id: kiro_workflows_dir
+    pattern: ".kiro/workflows/**"
+    category: workflow
+    confidence: 0.75
+    description: "Kiro workflows directory"
+
+  # Rules Directory
+  - id: kiro_rules_md
+    pattern: ".kiro/rules/**/*.md"
+    category: steering
+    confidence: 0.85
+    description: "Kiro rules and steering files"
+
+  - id: kiro_rules_dir
+    pattern: ".kiro/rules/**"
+    category: steering
+    confidence: 0.75
+    description: "Kiro rules directory"
+
+  # Agents and Subagents
+  - id: kiro_agents_md
+    pattern: ".kiro/agents/**/*.md"
+    category: identity
+    confidence: 0.85
+    description: "Kiro agent/subagent definitions"
+
+  - id: kiro_agents_dir
+    pattern: ".kiro/agents/**"
+    category: identity
+    confidence: 0.75
+    description: "Kiro agents directory"
+
+  # Commands
+  - id: kiro_commands_md
+    pattern: ".kiro/commands/**/*.md"
+    category: workflow
+    confidence: 0.85
+    description: "Kiro custom commands"
+
+  - id: kiro_commands_dir
+    pattern: ".kiro/commands/**"
+    category: workflow
+    confidence: 0.75
+    description: "Kiro commands directory"
+
+  # User-level skill detection
+  - id: kiro_user_skills_md
+    pattern: "skills/**/SKILL.md"
+    category: skill
+    confidence: 0.9
+    description: "Kiro skills at project root (Agent Skills standard)"
+
+  - id: kiro_user_skills_meta
+    pattern: "skills/**/_meta.json"
+    category: skill
+    confidence: 0.85
+    description: "Kiro skill metadata"

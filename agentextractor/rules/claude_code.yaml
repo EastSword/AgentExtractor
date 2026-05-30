@@ -1,0 +1,227 @@
+platform: claude-code
+
+rules:
+  # Core Configuration Files
+  - id: claude_md_root
+    pattern: "CLAUDE.md"
+    category: identity
+    confidence: 0.95
+    content_validators: ["contains_instructions"]
+    description: "Claude Code main instruction file at project root"
+
+  - id: claude_md_dotdir
+    pattern: ".claude/CLAUDE.md"
+    category: identity
+    confidence: 0.95
+    content_validators: ["contains_instructions"]
+    description: "Claude Code main instruction file in .claude directory"
+
+  - id: claude_dir
+    pattern: ".claude"
+    category: identity
+    confidence: 0.95
+    description: "Claude Code configuration directory"
+
+  # Settings
+  - id: claude_settings_json
+    pattern: ".claude/settings.json"
+    category: steering
+    confidence: 0.95
+    description: "Claude Code global settings"
+
+  - id: claude_settings_local
+    pattern: ".claude/settings.local.json"
+    category: steering
+    confidence: 0.9
+    description: "Claude Code local/override settings"
+
+  # Rules Directory
+  - id: claude_rules_md
+    pattern: ".claude/rules/**/*.md"
+    category: steering
+    confidence: 0.95
+    description: "Claude Code rules (conditional with paths)"
+
+  - id: claude_rules_dir
+    pattern: ".claude/rules/**"
+    category: steering
+    confidence: 0.85
+    description: "Claude Code rules directory"
+
+  # Skills Directory
+  - id: claude_skills_md
+    pattern: ".claude/skills/**/*.md"
+    category: skill
+    confidence: 0.95
+    description: "Claude Code skill definitions"
+
+  - id: claude_skills_dir
+    pattern: ".claude/skills/**"
+    category: skill
+    confidence: 0.85
+    description: "Claude Code skills directory"
+
+  # Subagents Directory
+  - id: claude_agents_md
+    pattern: ".claude/agents/**/*.md"
+    category: identity
+    confidence: 0.95
+    description: "Claude Code subagent definitions"
+
+  - id: claude_agents_dir
+    pattern: ".claude/agents/**"
+    category: identity
+    confidence: 0.85
+    description: "Claude Code agents directory"
+
+  # Commands Directory
+  - id: claude_commands_md
+    pattern: ".claude/commands/**/*.md"
+    category: workflow
+    confidence: 0.9
+    description: "Claude Code custom commands"
+
+  - id: claude_commands_dir
+    pattern: ".claude/commands/**"
+    category: workflow
+    confidence: 0.8
+    description: "Claude Code commands directory"
+
+  # Workflows Directory
+  - id: claude_workflows_yaml
+    pattern: ".claude/workflows/**/*.yaml"
+    category: workflow
+    confidence: 0.9
+    description: "Claude Code workflow definitions"
+
+  - id: claude_workflows_yml
+    pattern: ".claude/workflows/**/*.yml"
+    category: workflow
+    confidence: 0.9
+    description: "Claude Code workflow definitions"
+
+  - id: claude_workflows_json
+    pattern: ".claude/workflows/**/*.json"
+    category: workflow
+    confidence: 0.9
+    description: "Claude Code workflow definitions"
+
+  - id: claude_workflows_dir
+    pattern: ".claude/workflows/**"
+    category: workflow
+    confidence: 0.8
+    description: "Claude Code workflows directory"
+
+  # Output Styles
+  - id: claude_output_styles
+    pattern: ".claude/output-styles/**/*.md"
+    category: prompt
+    confidence: 0.85
+    description: "Claude Code output style templates"
+
+  - id: claude_output_dir
+    pattern: ".claude/output-styles/**"
+    category: prompt
+    confidence: 0.75
+    description: "Claude Code output styles directory"
+
+  # Memory and Context
+  - id: claude_agent_memory
+    pattern: ".claude/agent-memory/**/*.md"
+    category: memory
+    confidence: 0.9
+    description: "Claude Code agent-specific memory"
+
+  - id: claude_agent_memory_dir
+    pattern: ".claude/agent-memory/**"
+    category: memory
+    confidence: 0.8
+    description: "Claude Code agent memory directory"
+
+  - id: claude_memory_md
+    pattern: "MEMORY.md"
+    category: memory
+    confidence: 0.9
+    content_validators: ["has_memory_structure"]
+    description: "Claude Code memory file at root"
+
+  - id: claude_memory_dir
+    pattern: "memory/**/*.md"
+    category: memory
+    confidence: 0.8
+    description: "Memory directory at root"
+
+  # MCP Configuration
+  - id: claude_mcp_root
+    pattern: ".mcp.json"
+    category: mcp_config
+    confidence: 0.95
+    content_validators: ["has_mcp_config"]
+    description: "MCP configuration at project root"
+
+  - id: claude_mcp_dotdir
+    pattern: ".claude/mcp.json"
+    category: mcp_config
+    confidence: 0.95
+    content_validators: ["has_mcp_config"]
+    description: "MCP configuration in .claude directory"
+
+  - id: claude_mcp_dir
+    pattern: ".mcp/**/*"
+    category: mcp_config
+    confidence: 0.9
+    description: "MCP configuration directory"
+
+  # Prompts and Templates
+  - id: claude_prompts_md
+    pattern: ".claude/prompts/**/*.md"
+    category: prompt
+    confidence: 0.85
+    description: "Claude Code prompt templates"
+
+  - id: claude_prompts_dir
+    pattern: ".claude/prompts/**"
+    category: prompt
+    confidence: 0.75
+    description: "Claude Code prompts directory"
+
+  # Hooks
+  - id: claude_hooks
+    pattern: ".claude/hooks/**/*"
+    category: hook
+    confidence: 0.85
+    description: "Claude Code hook scripts"
+
+  # Knowledge and Documentation
+  - id: claude_knowledge_md
+    pattern: ".claude/knowledge/**/*.md"
+    category: knowledge
+    confidence: 0.85
+    description: "Claude Code knowledge base"
+
+  - id: claude_knowledge_dir
+    pattern: ".claude/knowledge/**"
+    category: knowledge
+    confidence: 0.75
+    description: "Claude Code knowledge directory"
+
+  - id: claude_docs_md
+    pattern: ".claude/docs/**/*.md"
+    category: knowledge
+    confidence: 0.8
+    description: "Claude Code documentation"
+
+  # Worktree Configuration
+  - id: claude_worktree
+    pattern: ".worktreeinclude"
+    category: steering
+    confidence: 0.85
+    description: "Worktree sync configuration"
+
+  # Root level AGENTS.md
+  - id: claude_agents_root
+    pattern: "AGENTS.md"
+    category: identity
+    confidence: 0.85
+    content_validators: ["contains_instructions"]
+    description: "Agent specification file at project root"

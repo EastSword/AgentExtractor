@@ -1,0 +1,84 @@
+platform: "*"
+
+rules:
+  - id: generic_memory_md
+    pattern: "**/MEMORY.md"
+    category: memory
+    confidence: 0.7
+    content_validators: ["has_memory_structure"]
+    description: "通用记忆文件"
+
+  - id: generic_memory_dir
+    pattern: "**/memory/**/*.md"
+    category: memory
+    confidence: 0.6
+    description: "通用记忆目录"
+
+  - id: generic_prompt_file
+    pattern: "**/*.prompt.md"
+    category: skill
+    confidence: 0.8
+    description: "Prompt 文件（.prompt.md 后缀）"
+
+  - id: generic_prompt_dir
+    pattern: "**/prompts/**/*.md"
+    category: skill
+    confidence: 0.7
+    description: "Prompts 目录下的文件"
+
+  - id: generic_mcp_json
+    pattern: "**/mcp*.json"
+    category: mcp_config
+    confidence: 0.7
+    content_validators: ["has_mcp_config"]
+    description: "通用 MCP 配置文件"
+
+  - id: generic_rules_md
+    pattern: "**/rules/**/*.md"
+    category: steering
+    confidence: 0.6
+    description: "通用规则目录"
+
+  - id: generic_soul_md
+    pattern: "**/SOUL.md"
+    category: identity
+    confidence: 0.8
+    content_validators: ["contains_instructions"]
+    description: "Agent 灵魂/人设文件"
+
+  - id: generic_user_md
+    pattern: "**/USER.md"
+    category: identity
+    confidence: 0.7
+    description: "用户画像文件"
+
+  - id: generic_hook_json
+    pattern: "**/hooks/**/*.json"
+    category: hook
+    confidence: 0.7
+    content_validators: ["has_hook_structure"]
+    description: "通用 hook 文件"
+
+  - id: generic_readme
+    pattern: "**/README.md"
+    category: documentation
+    confidence: 0.6
+    description: "README 文档"
+
+  - id: generic_package_json
+    pattern: "**/package.json"
+    category: dependency
+    confidence: 0.7
+    description: "Node.js 依赖声明"
+
+  - id: generic_requirements_txt
+    pattern: "**/requirements.txt"
+    category: dependency
+    confidence: 0.7
+    description: "Python 依赖声明"
+
+  - id: generic_pyproject
+    pattern: "**/pyproject.toml"
+    category: dependency
+    confidence: 0.7
+    description: "Python 项目配置"

@@ -1,0 +1,177 @@
+platform: codex
+
+rules:
+  - id: codex_agents_md
+    pattern: "AGENTS.md"
+    category: identity
+    confidence: 0.9
+    content_validators: ["contains_instructions"]
+    description: "Codex Agent 操作规范文件"
+
+  - id: codex_claude_md
+    pattern: "CLAUDE.md"
+    category: identity
+    confidence: 0.85
+    content_validators: ["contains_instructions"]
+    description: "Claude/Codex 指令文件"
+
+  - id: codex_instructions
+    pattern: "codex-instructions.md"
+    category: identity
+    confidence: 0.9
+    content_validators: ["contains_instructions"]
+    description: "Codex 指令文件"
+
+  - id: codex_setup_sh
+    pattern: "codex-setup.sh"
+    category: workflow
+    confidence: 0.8
+    description: "Codex 环境初始化脚本"
+
+  - id: codex_mcp_json
+    pattern: ".mcp.json"
+    category: mcp_config
+    confidence: 0.95
+    content_validators: ["has_mcp_config"]
+    description: "MCP Server 配置"
+
+  - id: codex_memory_md
+    pattern: "MEMORY.md"
+    category: memory
+    confidence: 0.85
+    content_validators: ["has_memory_structure"]
+    description: "Codex 记忆文件"
+
+  - id: codex_memory_dir
+    pattern: "memory/**/*.md"
+    category: memory
+    confidence: 0.8
+    description: "记忆目录文件"
+
+  - id: codex_knowledge_md
+    pattern: "KNOWLEDGE.md"
+    category: memory
+    confidence: 0.85
+    content_validators: ["has_memory_structure"]
+    description: "Codex 知识文件"
+
+  - id: codex_lessons_md
+    pattern: "LESSONS.md"
+    category: memory
+    confidence: 0.85
+    content_validators: ["has_memory_structure"]
+    description: "Codex 经验教训文件"
+
+  - id: codex_decision_md
+    pattern: "DECISION.md"
+    category: memory
+    confidence: 0.85
+    content_validators: ["has_memory_structure"]
+    description: "Codex 决策记录文件"
+
+  - id: codex_insights_md
+    pattern: "INSIGHTS.md"
+    category: memory
+    confidence: 0.85
+    content_validators: ["has_memory_structure"]
+    description: "Codex 洞察文件"
+
+  - id: codex_knowledge_dir
+    pattern: "knowledge/**/*.md"
+    category: memory
+    confidence: 0.8
+    description: "知识目录文件"
+
+  - id: codex_lessons_dir
+    pattern: "lessons/**/*.md"
+    category: memory
+    confidence: 0.8
+    content_validators: ["has_memory_structure"]
+    description: "经验教训目录文件"
+
+  - id: codex_learning_dir
+    pattern: "learning/**/*.md"
+    category: memory
+    confidence: 0.8
+    content_validators: ["has_memory_structure"]
+    description: "学习记录目录文件"
+
+  - id: codex_references_dir
+    pattern: "references/**/*.md"
+    category: knowledge
+    confidence: 0.9
+    description: "参考文档目录"
+
+  - id: codex_references_any
+    pattern: "**/references/**/*"
+    category: knowledge
+    confidence: 0.85
+    description: "任意位置的 references 目录"
+
+  - id: codex_docs_dir
+    pattern: "docs/**/*.md"
+    category: knowledge
+    confidence: 0.85
+    description: "文档目录"
+
+  - id: codex_readme_md
+    pattern: "README.md"
+    category: knowledge
+    confidence: 0.8
+    description: "项目说明文档"
+
+  - id: codex_api_doc
+    pattern: "**/API*.md"
+    category: knowledge
+    confidence: 0.85
+    description: "API 文档"
+
+  - id: codex_guide_md
+    pattern: "**/*Guide*.md"
+    category: knowledge
+    confidence: 0.8
+    description: "指南文档"
+
+  - id: codex_rules_doc
+    pattern: "**/*Rules*.md"
+    category: knowledge
+    confidence: 0.8
+    description: "规则文档"
+
+  - id: codex_soul_md
+    pattern: "SOUL.md"
+    category: identity
+    confidence: 0.9
+    content_validators: ["contains_instructions"]
+    description: "Agent 灵魂/核心人设文件"
+
+  - id: codex_user_md
+    pattern: "USER.md"
+    category: identity
+    confidence: 0.8
+    description: "用户画像文件"
+
+  - id: codex_company_rules
+    pattern: "company-rules.md"
+    category: steering
+    confidence: 0.9
+    content_validators: ["contains_instructions"]
+    description: "团队规范文件"
+
+  - id: codex_agents_dir
+    pattern: "agents/**/*.md"
+    category: identity
+    confidence: 0.85
+    description: "Agent 角色定义目录"
+
+  - id: codex_dot_agents_dir
+    pattern: ".agents/**/*"
+    category: identity
+    confidence: 0.85
+    description: "Agent 角色定义目录（隐藏）"
+
+  - id: codex_projects_dir
+    pattern: "projects/**/*.md"
+    category: workflow
+    confidence: 0.7
+    description: "项目定义文件"

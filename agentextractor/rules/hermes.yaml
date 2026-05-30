@@ -1,0 +1,306 @@
+platform: hermes
+
+rules:
+  # Core Configuration Directory
+  - id: hermes_dotdir
+    pattern: ".hermes"
+    category: identity
+    confidence: 0.95
+    description: "Hermes configuration directory"
+
+  - id: hermes_home_dir
+    pattern: "~/.hermes"
+    category: identity
+    confidence: 0.95
+    description: "Hermes home directory (global)"
+
+  # Main Configuration
+  - id: hermes_config_yaml
+    pattern: ".hermes/config.yaml"
+    category: identity
+    confidence: 0.95
+    description: "Hermes main configuration file"
+
+  - id: hermes_config_yml
+    pattern: ".hermes/config.yml"
+    category: identity
+    confidence: 0.95
+    description: "Hermes main configuration file (YAML)"
+
+  - id: hermes_config_json
+    pattern: ".hermes/config.json"
+    category: identity
+    confidence: 0.9
+    description: "Hermes configuration file (JSON)"
+
+  # Environment and Secrets
+  - id: hermes_env_file
+    pattern: ".hermes/.env"
+    category: identity
+    confidence: 0.9
+    description: "Hermes environment variables and secrets"
+
+  - id: hermes_auth_json
+    pattern: ".hermes/auth.json"
+    category: identity
+    confidence: 0.9
+    description: "Hermes authentication credentials"
+
+  # Agent Identity Files
+  - id: hermes_soul_md
+    pattern: ".hermes/SOUL.md"
+    category: identity
+    confidence: 0.95
+    description: "Hermes SOUL.md - agent personality and core identity"
+
+  - id: hermes_soul_root
+    pattern: "SOUL.md"
+    category: identity
+    confidence: 0.9
+    description: "Hermes SOUL.md at project root"
+
+  # Skills Directory
+  - id: hermes_skills_md
+    pattern: ".hermes/skills/**/SKILL.md"
+    category: skill
+    confidence: 0.95
+    description: "Hermes skill definitions"
+
+  - id: hermes_skills_dir
+    pattern: ".hermes/skills/**"
+    category: skill
+    confidence: 0.85
+    description: "Hermes skills directory"
+
+  # Memory Directory
+  - id: hermes_memories_md
+    pattern: ".hermes/memories/**/*.md"
+    category: memory
+    confidence: 0.95
+    description: "Hermes memory files"
+
+  - id: hermes_memories_dir
+    pattern: ".hermes/memories/**"
+    category: memory
+    confidence: 0.85
+    description: "Hermes memories directory"
+
+  - id: hermes_memory_md
+    pattern: ".hermes/memory/**/*.md"
+    category: memory
+    confidence: 0.9
+    description: "Hermes memory files (alternative dir name)"
+
+  - id: hermes_memory_dir
+    pattern: ".hermes/memory/**"
+    category: memory
+    confidence: 0.8
+    description: "Hermes memory directory (alternative dir name)"
+
+  # Cron Jobs Directory
+  - id: hermes_cron_dir
+    pattern: ".hermes/cron/**/*"
+    category: workflow
+    confidence: 0.9
+    description: "Hermes scheduled cron jobs"
+
+  # Sessions Directory
+  - id: hermes_sessions_dir
+    pattern: ".hermes/sessions/**/*"
+    category: memory
+    confidence: 0.85
+    description: "Hermes session data"
+
+  # Logs Directory
+  - id: hermes_logs_dir
+    pattern: ".hermes/logs/**/*"
+    category: memory
+    confidence: 0.8
+    description: "Hermes log files"
+
+  # Prompts and Templates
+  - id: hermes_prompts_md
+    pattern: ".hermes/prompts/**/*.md"
+    category: prompt
+    confidence: 0.85
+    description: "Hermes prompt templates"
+
+  - id: hermes_prompts_dir
+    pattern: ".hermes/prompts/**"
+    category: prompt
+    confidence: 0.75
+    description: "Hermes prompts directory"
+
+  - id: hermes_templates_dir
+    pattern: ".hermes/templates/**/*"
+    category: template
+    confidence: 0.8
+    description: "Hermes template files"
+
+  # Workflows and Automation
+  - id: hermes_workflows_yaml
+    pattern: ".hermes/workflows/**/*.yaml"
+    category: workflow
+    confidence: 0.85
+    description: "Hermes workflow definitions"
+
+  - id: hermes_workflows_yml
+    pattern: ".hermes/workflows/**/*.yml"
+    category: workflow
+    confidence: 0.85
+    description: "Hermes workflow definitions"
+
+  - id: hermes_workflows_json
+    pattern: ".hermes/workflows/**/*.json"
+    category: workflow
+    confidence: 0.85
+    description: "Hermes workflow definitions"
+
+  - id: hermes_workflows_dir
+    pattern: ".hermes/workflows/**"
+    category: workflow
+    confidence: 0.75
+    description: "Hermes workflows directory"
+
+  # Rules and Steering
+  - id: hermes_rules_md
+    pattern: ".hermes/rules/**/*.md"
+    category: steering
+    confidence: 0.85
+    description: "Hermes rules and steering files"
+
+  - id: hermes_rules_dir
+    pattern: ".hermes/rules/**"
+    category: steering
+    confidence: 0.75
+    description: "Hermes rules directory"
+
+  # MCP Configuration
+  - id: hermes_mcp_json
+    pattern: ".hermes/mcp.json"
+    category: mcp_config
+    confidence: 0.9
+    content_validators: ["has_mcp_config"]
+    description: "Hermes MCP configuration"
+
+  - id: hermes_mcp_dir
+    pattern: ".hermes/mcp/**/*"
+    category: mcp_config
+    confidence: 0.85
+    description: "Hermes MCP configuration directory"
+
+  # Hooks and Scripts
+  - id: hermes_hooks_py
+    pattern: ".hermes/hooks/**/*.py"
+    category: hook
+    confidence: 0.85
+    description: "Hermes Python hook scripts"
+
+  - id: hermes_hooks_js
+    pattern: ".hermes/hooks/**/*.js"
+    category: hook
+    confidence: 0.85
+    description: "Hermes JavaScript hook scripts"
+
+  - id: hermes_hooks_dir
+    pattern: ".hermes/hooks/**"
+    category: hook
+    confidence: 0.75
+    description: "Hermes hooks directory"
+
+  # Knowledge and Documentation
+  - id: hermes_knowledge_md
+    pattern: ".hermes/knowledge/**/*.md"
+    category: knowledge
+    confidence: 0.85
+    description: "Hermes knowledge base"
+
+  - id: hermes_knowledge_dir
+    pattern: ".hermes/knowledge/**"
+    category: knowledge
+    confidence: 0.75
+    description: "Hermes knowledge directory"
+
+  - id: hermes_docs_md
+    pattern: ".hermes/docs/**/*.md"
+    category: knowledge
+    confidence: 0.8
+    description: "Hermes documentation files"
+
+  # Context Files
+  - id: hermes_context_md
+    pattern: ".hermes/context/**/*.md"
+    category: knowledge
+    confidence: 0.85
+    description: "Hermes context files"
+
+  - id: hermes_context_dir
+    pattern: ".hermes/context/**"
+    category: knowledge
+    confidence: 0.75
+    description: "Hermes context directory"
+
+  # Agents/Subagents
+  - id: hermes_agents_md
+    pattern: ".hermes/agents/**/*.md"
+    category: identity
+    confidence: 0.9
+    description: "Hermes agent/subagent definitions"
+
+  - id: hermes_agents_dir
+    pattern: ".hermes/agents/**"
+    category: identity
+    confidence: 0.8
+    description: "Hermes agents directory"
+
+  # Commands
+  - id: hermes_commands_md
+    pattern: ".hermes/commands/**/*.md"
+    category: workflow
+    confidence: 0.85
+    description: "Hermes custom commands"
+
+  - id: hermes_commands_dir
+    pattern: ".hermes/commands/**"
+    category: workflow
+    confidence: 0.75
+    description: "Hermes commands directory"
+
+  # Plugins and Extensions
+  - id: hermes_plugins_dir
+    pattern: ".hermes/plugins/**/*"
+    category: dependency
+    confidence: 0.85
+    description: "Hermes plugins directory"
+
+  - id: hermes_extensions_dir
+    pattern: ".hermes/extensions/**/*"
+    category: dependency
+    confidence: 0.8
+    description: "Hermes extensions directory"
+
+  # Profiles and Distributions
+  - id: hermes_profiles_dir
+    pattern: ".hermes/profiles/**/*"
+    category: identity
+    confidence: 0.85
+    description: "Hermes profile definitions"
+
+  - id: hermes_distributions_dir
+    pattern: ".hermes/distributions/**/*"
+    category: identity
+    confidence: 0.8
+    description: "Hermes profile distributions"
+
+  # Root level files
+  - id: hermes_identity_root
+    pattern: "IDENTITY.md"
+    category: identity
+    confidence: 0.8
+    description: "Hermes identity file at project root"
+
+  - id: hermes_user_root
+    pattern: "USER.md"
+    category: identity
+    confidence: 0.8
+    description: "Hermes user profile at project root"

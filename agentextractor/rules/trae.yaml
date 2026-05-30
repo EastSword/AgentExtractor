@@ -1,0 +1,175 @@
+platform: trae
+
+rules:
+  # Core Configuration Files
+  - id: trae_hooks_json
+    pattern: ".trae/hooks.json"
+    category: hook
+    confidence: 0.95
+    content_validators: ["has_hook_structure"]
+    description: "Trae lifecycle hooks configuration"
+
+  - id: trae_automation_toml
+    pattern: ".trae/automation.toml"
+    category: hook
+    confidence: 0.95
+    description: "Trae automation tasks configuration"
+
+  - id: trae_mcp_config
+    pattern: ".trae/mcp-config.json"
+    category: mcp_config
+    confidence: 0.95
+    content_validators: ["has_mcp_config"]
+    description: "Trae MCP servers configuration"
+
+  - id: trae_settings_json
+    pattern: ".trae/settings.json"
+    category: steering
+    confidence: 0.95
+    description: "Trae workspace settings"
+
+  # Rules Directory
+  - id: trae_rules_dir
+    pattern: ".trae/rules/**/*.md"
+    category: steering
+    confidence: 0.95
+    description: "Trae rule files"
+
+  - id: trae_rules_mdc
+    pattern: ".trae/rules/**/*.mdc"
+    category: steering
+    confidence: 0.9
+    description: "Trae MDC rule files"
+
+  - id: trae_project_rules
+    pattern: ".trae/project_rules.md"
+    category: steering
+    confidence: 0.95
+    description: "Trae project rules"
+
+  - id: trae_user_rules
+    pattern: ".trae/user_rules.md"
+    category: steering
+    confidence: 0.95
+    description: "Trae user rules"
+
+  # Profiles Directory
+  - id: trae_profiles_all
+    pattern: ".trae/profiles/**/*.json"
+    category: identity
+    confidence: 0.9
+    description: "Trae agent profile configuration"
+
+  - id: trae_profiles_yaml
+    pattern: ".trae/profiles/**/*.yaml"
+    category: identity
+    confidence: 0.9
+    description: "Trae agent profile configuration"
+
+  - id: trae_profiles_yml
+    pattern: ".trae/profiles/**/*.yml"
+    category: identity
+    confidence: 0.9
+    description: "Trae agent profile configuration"
+
+  # Templates Directory
+  - id: trae_templates_all
+    pattern: ".trae/templates/**/*"
+    category: template
+    confidence: 0.85
+    description: "Trae prompt templates"
+
+  # Skills Directory
+  - id: trae_skills_all
+    pattern: ".trae/skills/**/*.md"
+    category: skill
+    confidence: 0.95
+    description: "Trae skill definition"
+
+  # Knowledge Directory
+  - id: trae_knowledge_all
+    pattern: ".trae/knowledge/**/*.md"
+    category: knowledge
+    confidence: 0.9
+    description: "Trae knowledge document"
+
+  # Memory Directory
+  - id: trae_memory_all
+    pattern: ".trae/memory/**/*.md"
+    category: memory
+    confidence: 0.9
+    description: "Trae memory entry"
+
+  # Context Directory
+  - id: trae_context_all
+    pattern: ".trae/context/**/*"
+    category: knowledge
+    confidence: 0.85
+    description: "Trae context files"
+
+  # Docs Directory
+  - id: trae_docs_all
+    pattern: ".trae/docs/**/*.md"
+    category: knowledge
+    confidence: 0.85
+    description: "Trae documentation"
+
+  # Workflows Directory
+  - id: trae_workflows_yaml
+    pattern: ".trae/workflows/**/*.yaml"
+    category: workflow
+    confidence: 0.95
+    description: "Trae workflow definition"
+
+  - id: trae_workflows_yml
+    pattern: ".trae/workflows/**/*.yml"
+    category: workflow
+    confidence: 0.95
+    description: "Trae workflow definition"
+
+  - id: trae_workflows_json
+    pattern: ".trae/workflows/**/*.json"
+    category: workflow
+    confidence: 0.95
+    description: "Trae workflow definition"
+
+  # Hooks Directory
+  - id: trae_hooks_python
+    pattern: ".trae/hooks/**/*.py"
+    category: hook
+    confidence: 0.9
+    description: "Trae Python hook script"
+
+  - id: trae_hooks_js
+    pattern: ".trae/hooks/**/*.js"
+    category: hook
+    confidence: 0.9
+    description: "Trae JavaScript hook script"
+
+  - id: trae_hooks_ts
+    pattern: ".trae/hooks/**/*.ts"
+    category: hook
+    confidence: 0.9
+    description: "Trae TypeScript hook script"
+
+  # MCP Config (alternate filename)
+  - id: trae_mcp_json
+    pattern: ".trae/mcp.json"
+    category: mcp_config
+    confidence: 0.95
+    content_validators: ["has_mcp_config"]
+    description: "Trae MCP configuration"
+
+  # Agents Directory
+  - id: trae_agents_all
+    pattern: ".trae/agents/**/*"
+    category: identity
+    confidence: 0.85
+    description: "Trae agent definition"
+
+  # Root .trae directory marker
+  - id: trae_root_marker
+    pattern: ".trae"
+    category: identity
+    confidence: 0.7
+    description: "Trae workspace root directory"

@@ -1,0 +1,256 @@
+platform: openclaw
+
+rules:
+  # Core Identity Files - SOUL.md is the most important
+  - id: openclaw_soul_md
+    pattern: "SOUL.md"
+    category: identity
+    confidence: 0.95
+    description: "OpenClaw SOUL.md - Agent personality and core identity"
+
+  - id: openclaw_identity_md
+    pattern: "IDENTITY.md"
+    category: identity
+    confidence: 0.9
+    description: "OpenClaw IDENTITY.md - Agent presentation and persona"
+
+  - id: openclaw_user_md
+    pattern: "USER.md"
+    category: memory
+    confidence: 0.9
+    description: "OpenClaw USER.md - User context and preferences"
+
+  - id: openclaw_agents_md
+    pattern: "AGENTS.md"
+    category: identity
+    confidence: 0.85
+    description: "OpenClaw AGENTS.md - Agent definitions and configuration"
+
+  # docs/personality directory (OpenClaw standard structure)
+  - id: openclaw_personality_soul
+    pattern: "docs/personality/SOUL.md"
+    category: identity
+    confidence: 0.95
+    description: "OpenClaw SOUL.md in docs/personality directory"
+
+  - id: openclaw_personality_identity
+    pattern: "docs/personality/IDENTITY.md"
+    category: identity
+    confidence: 0.9
+    description: "OpenClaw IDENTITY.md in docs/personality directory"
+
+  - id: openclaw_personality_user
+    pattern: "docs/personality/USER.md"
+    category: memory
+    confidence: 0.9
+    description: "OpenClaw USER.md in docs/personality directory"
+
+  - id: openclaw_personality_agents
+    pattern: "docs/personality/AGENTS.md"
+    category: identity
+    confidence: 0.85
+    description: "OpenClaw AGENTS.md in docs/personality directory"
+
+  - id: openclaw_personality_dir
+    pattern: "docs/personality"
+    category: identity
+    confidence: 0.85
+    description: "OpenClaw personality configuration directory"
+
+  # Heartbeat and Automation
+  - id: openclaw_heartbeat_md
+    pattern: "HEARTBEAT.md"
+    category: workflow
+    confidence: 0.85
+    description: "OpenClaw HEARTBEAT.md - Recurring task checklist"
+
+  - id: openclaw_heartbeat_personality
+    pattern: "docs/personality/HEARTBEAT.md"
+    category: workflow
+    confidence: 0.85
+    description: "OpenClaw HEARTBEAT.md in docs/personality directory"
+
+  # Configuration Files
+  - id: openclaw_config_yaml
+    pattern: "openclaw.yaml"
+    category: identity
+    confidence: 0.95
+    description: "OpenClaw configuration file"
+
+  - id: openclaw_config_json
+    pattern: "openclaw.json"
+    category: identity
+    confidence: 0.9
+    description: "OpenClaw JSON configuration"
+
+  - id: openclaw_dotdir
+    pattern: ".openclaw"
+    category: identity
+    confidence: 0.95
+    description: "OpenClaw configuration directory"
+
+  - id: openclaw_dotdir_config
+    pattern: ".openclaw/*.yaml"
+    category: identity
+    confidence: 0.9
+    description: "OpenClaw configuration files in .openclaw directory"
+
+  - id: openclaw_dotdir_config_json
+    pattern: ".openclaw/*.json"
+    category: identity
+    confidence: 0.9
+    description: "OpenClaw JSON configuration files in .openclaw directory"
+
+  # Skills
+  - id: openclaw_skills_md
+    pattern: "skills/**/SKILL.md"
+    category: skill
+    confidence: 0.9
+    description: "OpenClaw skill definition"
+
+  - id: openclaw_dot_skills
+    pattern: ".openclaw/skills/**/*.md"
+    category: skill
+    confidence: 0.9
+    description: "OpenClaw skills in .openclaw directory"
+
+  - id: openclaw_skills_dir
+    pattern: "skills/**"
+    category: skill
+    confidence: 0.8
+    description: "OpenClaw skills directory"
+
+  # Memory and Storage
+  - id: openclaw_memory_md
+    pattern: "memory/**/*.md"
+    category: memory
+    confidence: 0.85
+    description: "OpenClaw memory files"
+
+  - id: openclaw_dot_memory
+    pattern: ".openclaw/memory/**/*.md"
+    category: memory
+    confidence: 0.85
+    description: "OpenClaw memory files in .openclaw directory"
+
+  - id: openclaw_memory_dir
+    pattern: "memory/**"
+    category: memory
+    confidence: 0.75
+    description: "OpenClaw memory directory"
+
+  # Workflows and Automation
+  - id: openclaw_workflows_yaml
+    pattern: "workflows/**/*.yaml"
+    category: workflow
+    confidence: 0.85
+    description: "OpenClaw workflow definition"
+
+  - id: openclaw_workflows_yml
+    pattern: "workflows/**/*.yml"
+    category: workflow
+    confidence: 0.85
+    description: "OpenClaw workflow definition"
+
+  - id: openclaw_workflows_json
+    pattern: "workflows/**/*.json"
+    category: workflow
+    confidence: 0.85
+    description: "OpenClaw workflow definition"
+
+  - id: openclaw_dot_workflows
+    pattern: ".openclaw/workflows/**/*"
+    category: workflow
+    confidence: 0.85
+    description: "OpenClaw workflows in .openclaw directory"
+
+  # Hooks and Scripts
+  - id: openclaw_hooks_py
+    pattern: "hooks/**/*.py"
+    category: hook
+    confidence: 0.85
+    description: "OpenClaw Python hook scripts"
+
+  - id: openclaw_hooks_js
+    pattern: "hooks/**/*.js"
+    category: hook
+    confidence: 0.85
+    description: "OpenClaw JavaScript hook scripts"
+
+  - id: openclaw_dot_hooks
+    pattern: ".openclaw/hooks/**/*"
+    category: hook
+    confidence: 0.85
+    description: "OpenClaw hooks in .openclaw directory"
+
+  # Rules and Steering
+  - id: openclaw_rules_md
+    pattern: "rules/**/*.md"
+    category: steering
+    confidence: 0.85
+    description: "OpenClaw rules and steering files"
+
+  - id: openclaw_dot_rules
+    pattern: ".openclaw/rules/**/*.md"
+    category: steering
+    confidence: 0.85
+    description: "OpenClaw rules in .openclaw directory"
+
+  # Prompts and Templates
+  - id: openclaw_prompts_md
+    pattern: "prompts/**/*.md"
+    category: prompt
+    confidence: 0.85
+    description: "OpenClaw prompt templates"
+
+  - id: openclaw_dot_prompts
+    pattern: ".openclaw/prompts/**/*"
+    category: prompt
+    confidence: 0.85
+    description: "OpenClaw prompts in .openclaw directory"
+
+  - id: openclaw_templates
+    pattern: "templates/**/*"
+    category: template
+    confidence: 0.8
+    description: "OpenClaw templates directory"
+
+  - id: openclaw_dot_templates
+    pattern: ".openclaw/templates/**/*"
+    category: template
+    confidence: 0.8
+    description: "OpenClaw templates in .openclaw directory"
+
+  # Knowledge and Documentation
+  - id: openclaw_docs_md
+    pattern: "docs/**/*.md"
+    category: knowledge
+    confidence: 0.8
+    description: "OpenClaw documentation files"
+
+  - id: openclaw_knowledge
+    pattern: "knowledge/**/*.md"
+    category: knowledge
+    confidence: 0.85
+    description: "OpenClaw knowledge base"
+
+  - id: openclaw_dot_knowledge
+    pattern: ".openclaw/knowledge/**/*.md"
+    category: knowledge
+    confidence: 0.85
+    description: "OpenClaw knowledge in .openclaw directory"
+
+  # MCP Configuration
+  - id: openclaw_mcp_json
+    pattern: ".mcp.json"
+    category: mcp_config
+    confidence: 0.9
+    content_validators: ["has_mcp_config"]
+    description: "OpenClaw MCP configuration"
+
+  - id: openclaw_dot_mcp
+    pattern: ".openclaw/mcp.json"
+    category: mcp_config
+    confidence: 0.9
+    content_validators: ["has_mcp_config"]
+    description: "OpenClaw MCP configuration in .openclaw directory"
