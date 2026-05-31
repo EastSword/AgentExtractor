@@ -256,6 +256,32 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
 .dir-item .btn { padding: 4px 10px; font-size: 11px; }
 .dir-item.confirmed { opacity: 0.4; }
 
+/* Manual supplement item */
+.manual-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 10px; border-radius: var(--radius); margin-bottom: 2px;
+    background: #fff8e1; border: 1px dashed var(--warning);
+    transition: background 0.1s;
+}
+.manual-item:hover { background: #fff3cd; }
+.manual-item .manual-badge {
+    font-size: 9px; padding: 1px 5px; border-radius: 3px;
+    background: var(--warning); color: white; font-weight: 600; white-space: nowrap;
+}
+.manual-item .manual-path {
+    flex: 1; font-size: 12px; color: var(--text-primary);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.manual-item select {
+    padding: 3px 6px; font-size: 11px; border: 1px solid var(--border);
+    border-radius: 4px; background: var(--bg-secondary); color: var(--text-primary);
+}
+.manual-item .btn-remove {
+    cursor: pointer; color: var(--text-muted); font-size: 14px; padding: 0 4px;
+    border: none; background: none; line-height: 1;
+}
+.manual-item .btn-remove:hover { color: var(--danger); }
+
 /* Export bar */
 .export-bar {
     position: fixed; bottom: 0; left: 240px; right: 0;
@@ -346,6 +372,7 @@ function getCategoryDisplay(category) {
 let scanData = null;
 let activeCategory = null;
 let workPaths = [];
+let manualItems = [];
 
 // Path management
 function addPath() {
@@ -811,6 +838,35 @@ function renderContent(data, filterCat) {
         }
     }
 
+    if (!filterCat || filterCat === '__dirs__') {
+        html += `<div class="section">
+            <div class="section-title" style="display:flex;align-items:center;justify-content:space-between">
+                <span><span class="icon icon-star" style="color:var(--warning)"></span> 人工补充 <span class="count">${manualItems.length}</span></span>
+                <span style="display:flex;gap:4px">
+                    <button class="btn btn-ghost" style="padding:3px 8px;font-size:11px" onclick="addManualFile()"><span class="icon icon-file"></span> 添加文件</button>
+                    <button class="btn btn-ghost" style="padding:3px 8px;font-size:11px" onclick="addManualDir()"><span class="icon icon-folder"></span> 添加目录</button>
+                </span>
+            </div>
+            <p style="font-size:11px;color:var(--text-muted);margin-bottom:8px">手动添加扫描未覆盖的文件或目录，补充能力维度后一起打包导出</p>`;
+        if (manualItems.length === 0) {
+            html += '<div style="padding:12px;text-align:center;color:var(--text-muted);font-size:12px;background:var(--bg-tertiary);border-radius:var(--radius);border:1px dashed var(--border)">暂无补充项，点击上方按钮添加</div>';
+        } else {
+            manualItems.forEach((item, i) => {
+                const typeLabel = item.type === 'dir' ? '目录' : '文件';
+                const metaInfo = item.type === 'dir' && item.file_count ? ` (${item.file_count} 文件)` : '';
+                html += `<div class="manual-item">
+                    <span class="manual-badge">${typeLabel}</span>
+                    <span class="manual-path" title="${item.path}">${item.path}${metaInfo}</span>
+                    <select onchange="updateManualCategory(${i}, this.value)">
+                        ${Object.entries(CATEGORIES).map(([id,c]) => `<option value="${id}" ${id===item.category?'selected':''}>${c.name}</option>`).join('')}
+                    </select>
+                    <button class="btn-remove" onclick="removeManualItem(${i})" title="移除">&times;</button>
+                </div>`;
+            });
+        }
+        html += '</div>';
+    }
+
     area.innerHTML = html;
 }
 
@@ -855,28 +911,96 @@ async function confirmDir(i, path) {
     updateNavCounts();
     renderContent(scanData, activeCategory);
 }
+
+async function addManualFile() {
+    try {
+        const resp = await fetch('/api/choose-file', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: '{}' });
+        const data = await resp.json();
+        if (data.status === 'ok' && data.path) {
+            const path = data.path;
+            if (manualItems.some(m => m.path === path)) return;
+            const ext = path.split('.').pop().toLowerCase();
+            let suggestedCat = 'unknown';
+            if (['md', 'txt'].includes(ext)) suggestedCat = 'documentation';
+            else if (ext === 'json') suggestedCat = 'mcp_config';
+            else if (['yaml', 'yml'].includes(ext)) suggestedCat = 'steering';
+            else if (['py', 'js', 'sh'].includes(ext)) suggestedCat = 'hook';
+            manualItems.push({ path, type: 'file', category: suggestedCat });
+            renderContent(scanData, activeCategory);
+        }
+    } catch(e) { console.error(e); }
+}
+
+async function addManualDir() {
+    try {
+        const resp = await fetch('/api/choose-dir', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: '{}' });
+        const data = await resp.json();
+        if (data.status === 'ok' && data.path) {
+            const path = data.path;
+            if (manualItems.some(m => m.path === path)) return;
+            const scanResp = await fetch('/api/scan-path', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({path}) });
+            const scanData2 = await scanResp.json();
+            const fileCount = scanData2.file_count || 0;
+            let suggestedCat = 'unknown';
+            const dirName = path.split('/').pop().toLowerCase();
+            if (dirName.includes('skill')) suggestedCat = 'skill';
+            else if (dirName.includes('rule') || dirName.includes('steering')) suggestedCat = 'steering';
+            else if (dirName.includes('mcp') || dirName.includes('tool')) suggestedCat = 'mcp_config';
+            else if (dirName.includes('memory') || dirName.includes('knowledge')) suggestedCat = 'memory';
+            else if (dirName.includes('workflow')) suggestedCat = 'workflow';
+            else if (dirName.includes('hook') || dirName.includes('auto')) suggestedCat = 'hook';
+            else if (dirName.includes('agent') || dirName.includes('identity')) suggestedCat = 'identity';
+            manualItems.push({ path, type: 'dir', category: suggestedCat, file_count: fileCount });
+            renderContent(scanData, activeCategory);
+        }
+    } catch(e) { console.error(e); }
+}
+
+function removeManualItem(index) {
+    manualItems.splice(index, 1);
+    renderContent(scanData, activeCategory);
+}
+
+function updateManualCategory(index, newCat) {
+    manualItems[index].category = newCat;
+}
+
 async function doExport() {
     const outputDir = document.getElementById('output-path').value.trim();
     if (!outputDir) return;
     const name = outputDir.split('/').pop();
+    const exportBtn = document.querySelector('#export-bar .btn-success');
+    const originalText = exportBtn.textContent;
+    exportBtn.disabled = true;
+    exportBtn.textContent = '导出中...';
+    
     const resp = await fetch('/api/export', {
         method:'POST', 
         headers:{'Content-Type':'application/json'}, 
         body:JSON.stringify({
             name, 
             output_dir: outputDir,
-            include_bundle: true
+            include_bundle: true,
+            manual_items: manualItems
         })
     });
     const data = await resp.json();
+    
+    exportBtn.disabled = false;
+    exportBtn.textContent = originalText;
+    
     if (data.error) { alert(data.error); return; }
     
-    let msg = '✓ 已导出 ' + (data.size_bytes/1024).toFixed(1) + 'KB';
+    let msg = '已导出 ' + (data.size_bytes/1024).toFixed(1) + 'KB';
     if (data.bundle) {
-        msg += '\n<span class="icon icon-import"></span> 压缩包: ' + data.bundle;
+        msg += ' | 压缩包: ' + data.bundle;
     }
-    document.getElementById('export-msg').textContent = msg;
-    document.getElementById('export-msg').style.whiteSpace = 'pre-wrap';
+    if (data.manual_added !== undefined && data.manual_added > 0) {
+        msg += ' | 人工补充: ' + data.manual_added + ' 文件';
+    }
+    const msgEl = document.getElementById('export-msg');
+    msgEl.textContent = msg;
+    msgEl.style.color = 'var(--success)';
 }
 
 async function doGlobalScan() {

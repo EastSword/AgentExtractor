@@ -3,6 +3,7 @@
 import json
 import hashlib
 import logging
+import os
 import re
 from datetime import datetime, timezone
 from pathlib import Path
@@ -136,6 +137,127 @@ class Packager:
             distillation_report=report,
         )
 
+    def add_manual_items(self, package: AgentPackage, manual_items: list) -> int:
+        """将人工补充的文件/目录添加到 AgentPackage 中
+        
+        Args:
+            package: AgentPackage对象
+            manual_items: 人工补充项列表，每项包含 path, type, category
+        
+        Returns:
+            添加的文件数量
+        """
+        from agentextractor.core.classifier import is_binary_file, should_skip_dir
+        
+        category_dirs = {
+            "identity": "identity",
+            "skill": "skills",
+            "mcp_config": "mcps",
+            "steering": "steering",
+            "memory": "memory",
+            "knowledge": "memory",
+            "workflow": "workflows",
+            "hook": "hooks",
+            "dependency": "dependencies",
+            "documentation": "docs",
+            "unknown": "unknown",
+        }
+        
+        added_count = 0
+        existing_hashes = {r.content_sha256 for r in package.raw_resources}
+        
+        for item in manual_items:
+            path = Path(item.get("path", ""))
+            category = item.get("category", "unknown")
+            item_type = item.get("type", "file")
+            
+            if not path.exists():
+                logger.warning(f"[人工补充] 路径不存在: {path}")
+                continue
+            
+            files_to_add = []
+            if path.is_file():
+                if not is_binary_file(path):
+                    files_to_add.append(path)
+            elif path.is_dir():
+                for root, dirs, filenames in os.walk(path):
+                    depth = len(Path(root).relative_to(path).parts)
+                    if depth >= 3:
+                        dirs.clear()
+                        continue
+                    dirs[:] = [d for d in dirs if not should_skip_dir(d)]
+                    for f in filenames:
+                        fp = Path(root) / f
+                        if not is_binary_file(fp):
+                            files_to_add.append(fp)
+            
+            for fp in files_to_add:
+                try:
+                    content = fp.read_text(encoding="utf-8", errors="replace")
+                    content_hash = hashlib.sha256(content.encode()).hexdigest()
+                    
+                    if content_hash in existing_hashes:
+                        logger.debug(f"[人工补充] 跳过重复文件: {fp}")
+                        continue
+                    
+                    existing_hashes.add(content_hash)
+                    
+                    rel_path = str(fp.relative_to(path.parent)) if path.is_dir() else fp.name
+                    
+                    raw = RawResource(
+                        id=content_hash,
+                        kind=category,
+                        platform="manual",
+                        scope="manual",
+                        source_path=str(fp),
+                        content_raw=content,
+                        content_sha256=content_hash,
+                        discovery_order=len(package.raw_resources) + added_count + 1,
+                        read_status="ok",
+                        source_type=category,
+                        is_runtime_cache=False,
+                        is_duplicate=False,
+                        duplicate_of=None,
+                    )
+                    package.raw_resources.append(raw)
+                    
+                    normalized = NormalizedResource(
+                        raw_id=content_hash,
+                        name=fp.stem,
+                        description=content[:200],
+                        category=category,
+                        frontmatter={},
+                        tools=[],
+                        activation_keywords=[],
+                        variables=[],
+                        source_file=str(fp),
+                        target_mapping=[],
+                        parsed=True,
+                    )
+                    package.normalized_resources.append(normalized)
+                    
+                    dir_name = category_dirs.get(category, "unknown")
+                    filename = fp.name
+                    
+                    proj_file = ProjectionFile(
+                        target_path=f"manual/{dir_name}/{filename}",
+                        content=content,
+                        source_raw_ids=[content_hash],
+                        mapping_type="manual_supplement",
+                        status="generated",
+                    )
+                    proj_file.compute_hash()
+                    package.projection.files.append(proj_file)
+                    
+                    added_count += 1
+                    
+                except Exception as e:
+                    logger.warning(f"[人工补充] 读取文件失败: {fp}, 错误: {e}")
+                    continue
+        
+        logger.info(f"[人工补充] 添加了 {added_count} 个文件")
+        return added_count
+
     def export_json(self, package: AgentPackage, output_path: Path) -> Path:
         """导出为 .agentpkg.json 文件"""
         data = package.to_dict()
@@ -212,13 +334,14 @@ class Packager:
             # 从projection文件提取内容，按分类组织
             for proj_file in package.projection.files:
                 if proj_file.content:
-                    # 从mapping_type推断分类
                     mapping = proj_file.mapping_type or ""
                     category = self._mapping_type_to_category(mapping)
                     target_path = proj_file.target_path
                     
-                    # 确定目标目录
-                    if category in category_dirs:
+                    if category == "manual":
+                        zip_path = target_path
+                        dir_name = target_path.split("/")[0] if "/" in target_path else "manual"
+                    elif category in category_dirs:
                         dir_name = category_dirs[category]
                         filename = Path(target_path).name
                         zip_path = f"{dir_name}/{filename}"
@@ -226,10 +349,8 @@ class Packager:
                         zip_path = f"unknown/{Path(target_path).name}"
                         dir_name = "unknown"
                     
-                    # 添加文件到压缩包
                     zf.writestr(zip_path, proj_file.content)
                     
-                    # 记录目录
                     used_dirs.add(dir_name)
                     catalog["categories"][dir_name] = catalog["categories"].get(dir_name, 0) + 1
             
@@ -272,6 +393,8 @@ class Packager:
     
     def _mapping_type_to_category(self, mapping_type: str) -> str:
         """将mapping_type转换为分类目录"""
+        if mapping_type == "manual_supplement":
+            return "manual"
         mapping = {
             "claude_subagent": "identity",
             "claude_command": "skills",

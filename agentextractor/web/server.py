@@ -2,6 +2,7 @@
 
 import json
 import logging
+import os
 import threading
 import webbrowser
 from pathlib import Path
@@ -381,6 +382,36 @@ def api_open_finder():
     return jsonify({"status": "ok"})
 
 
+@app.route("/api/scan-path", methods=["POST"])
+def api_scan_path():
+    """扫描指定路径，返回文件数量信息"""
+    data = request.json
+    path = data.get("path", "")
+    
+    if not path or not Path(path).exists():
+        return jsonify({"error": f"路径不存在: {path}"}), 400
+    
+    target = Path(path)
+    file_count = 0
+    
+    if target.is_file():
+        file_count = 1
+    elif target.is_dir():
+        from agentextractor.core.classifier import is_binary_file, should_skip_dir
+        for root, dirs, files in os.walk(target):
+            depth = len(Path(root).relative_to(target).parts)
+            if depth >= 3:
+                dirs.clear()
+                continue
+            dirs[:] = [d for d in dirs if not should_skip_dir(d)]
+            for f in files:
+                fp = Path(root) / f
+                if not is_binary_file(fp):
+                    file_count += 1
+    
+    return jsonify({"status": "ok", "path": path, "file_count": file_count})
+
+
 @app.route("/api/export", methods=["POST"])
 def api_export():
     """导出 Agent Package"""
@@ -388,8 +419,9 @@ def api_export():
     name = data.get("name", "my-agent")
     output_dir = data.get("output_dir", str(Path.home()))
     include_bundle = data.get("include_bundle", True)
+    manual_items = data.get("manual_items", [])
 
-    logger.info(f"[导出] 开始导出: name={name}, output_dir={output_dir}")
+    logger.info(f"[导出] 开始导出: name={name}, output_dir={output_dir}, manual_items={len(manual_items)}")
 
     scan_result = _state.get("scan_result")
     if not scan_result:
@@ -403,6 +435,10 @@ def api_export():
         output_path = Path(output_dir)
         output_path.mkdir(parents=True, exist_ok=True)
         
+        manual_added = 0
+        if manual_items:
+            manual_added = packager.add_manual_items(package, manual_items)
+        
         if include_bundle:
             json_file = packager.export_bundle(package, output_path)
             zip_file = output_path / f"{json_file.stem}.zip"
@@ -413,7 +449,7 @@ def api_export():
         report = package.distillation_report
         size = json_file.stat().st_size
 
-        logger.info(f"[导出] 完成: {json_file}, 大小: {size} bytes, 完整: {report.complete_items if report else 0}")
+        logger.info(f"[导出] 完成: {json_file}, 大小: {size} bytes, 人工补充: {manual_added}")
 
         return jsonify({
             "status": "ok",
@@ -423,6 +459,7 @@ def api_export():
             "complete": report.complete_items if report else 0,
             "degraded": report.degraded_items if report else 0,
             "unconfirmed": report.unconfirmed_items if report else 0,
+            "manual_added": manual_added,
         })
     except Exception as e:
         logger.error(f"[导出] 失败: {e}", exc_info=True)
