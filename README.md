@@ -4,7 +4,19 @@
 
 ---
 
-## 🌟 项目价值
+## 界面预览
+
+| 主界面 | 扫描结果 |
+|:---:|:---:|
+| ![主界面](docs/images/01_main_page.png) | ![扫描结果](docs/images/02_scan_result.png) |
+
+| 技能分类 | 完整页面 |
+|:---:|:---:|
+| ![技能分类](docs/images/03_skills_category.png) | ![完整页面](docs/images/04_full_page.png) |
+
+---
+
+## 项目价值
 
 ### 解决的核心问题
 

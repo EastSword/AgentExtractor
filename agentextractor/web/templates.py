@@ -1100,7 +1100,7 @@ function showImport() {
             <div style="margin-bottom:16px">
                 <div style="display:flex;gap:8px;align-items:flex-end">
                     <div style="flex:1">
-                        <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:4px">1. 选择导出的 .agentpkg.json 文件</label>
+                        <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:4px">1. 选择导出的 .agentpkg.json 或 .zip 压缩包</label>
                         <input type="text" id="import-json-path" placeholder="点击右侧浏览选择文件" style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px">
                     </div>
                     <button class="btn btn-primary" onclick="browseImportJson()"><span class="icon icon-folder"></span> 浏览</button>
@@ -1175,7 +1175,12 @@ async function browseImportJson() {
 async function loadImportPackage() {
     const jsonPath = document.getElementById('import-json-path').value;
     if (!jsonPath) {
-        alert('请先选择 JSON 文件');
+        alert('请先选择文件');
+        return;
+    }
+    const ext = jsonPath.split('.').pop().toLowerCase();
+    if (ext !== 'json' && ext !== 'zip') {
+        alert('请选择 .agentpkg.json 或 .zip 文件');
         return;
     }
 

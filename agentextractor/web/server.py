@@ -708,24 +708,59 @@ _import_state = {
 
 @app.route("/api/import/load", methods=["POST"])
 def api_import_load():
-    """Load an agent package from JSON file."""
+    """Load an agent package from JSON or ZIP file."""
     data = request.json
     json_path = data.get("json_path", "")
 
     if not json_path:
-        return jsonify({"error": "请指定 JSON 文件路径"}), 400
+        return jsonify({"error": "请指定文件路径"}), 400
 
-    json_file = Path(json_path)
-    if not json_file.exists():
+    source_file = Path(json_path)
+    if not source_file.exists():
         return jsonify({"error": f"文件不存在: {json_path}"}), 400
-
-    if not json_file.suffix == ".json" and not json_file.name.endswith(".agentpkg.json"):
-        return jsonify({"error": "请选择 .agentpkg.json 文件"}), 400
 
     try:
         from agentextractor.core.importer import AgentImporter
+        import zipfile
+        import tempfile
+
+        actual_json_path = source_file
+        temp_dir = None
+
+        if source_file.suffix == ".zip":
+            temp_dir = tempfile.mkdtemp(prefix="agentextractor_import_")
+            with zipfile.ZipFile(source_file, 'r') as zf:
+                zf.extractall(temp_dir)
+            
+            json_files = list(Path(temp_dir).rglob("*.agentpkg.json"))
+            if not json_files:
+                json_files = list(Path(temp_dir).rglob("*.json"))
+            if not json_files:
+                import shutil
+                shutil.rmtree(temp_dir, ignore_errors=True)
+                return jsonify({"error": "压缩包中未找到 .agentpkg.json 文件"}), 400
+            
+            actual_json_path = json_files[0]
+            
+            with open(actual_json_path, 'r', encoding='utf-8') as f:
+                package_data = json.load(f)
+            
+            projection_files = package_data.get("projection", {}).get("files", [])
+            for proj_file in projection_files:
+                target_path = proj_file.get("target_path", "")
+                if not target_path or not proj_file.get("content"):
+                    extracted_file = Path(temp_dir) / target_path
+                    if extracted_file.exists():
+                        proj_file["content"] = extracted_file.read_text(encoding="utf-8", errors="replace")
+            
+            with open(actual_json_path, 'w', encoding='utf-8') as f:
+                json.dump(package_data, f, ensure_ascii=False, indent=2)
+
+        elif source_file.suffix != ".json":
+            return jsonify({"error": "请选择 .agentpkg.json 或 .zip 文件"}), 400
+
         importer = AgentImporter()
-        importer.load_package(json_file)
+        importer.load_package(actual_json_path)
 
         info = importer.get_package_info()
         available_modes = importer.get_available_modes()
@@ -734,6 +769,8 @@ def api_import_load():
 
         _import_state["package_data"] = importer.package_data
         _import_state["package_info"] = info
+        if temp_dir:
+            _import_state["temp_dir"] = temp_dir
 
         logger.info(f"[导入] 加载文件: {json_path}, 平台: {info.get('source_platform')}, 资源: {info.get('total_resources')}")
 
@@ -742,10 +779,10 @@ def api_import_load():
             "package_info": info,
             "available_modes": available_modes,
             "package_analysis": package_analysis,
-            "json_path": str(json_file),
+            "json_path": str(actual_json_path),
         })
     except Exception as e:
-        logger.error(f"[导入] 加载失败: {e}")
+        logger.error(f"[导入] 加载失败: {e}", exc_info=True)
         return jsonify({"error": f"加载失败: {str(e)}"}), 400
 
 
